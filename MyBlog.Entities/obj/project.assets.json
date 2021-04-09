@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "MyBlog.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/MyBlog.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MyBlog.Shared.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MyBlog.Shared/1.0.0": {
+      "type": "project",
+      "path": "../MyBlog.Shared/MyBlog.Shared.csproj",
+      "msbuildProject": "../MyBlog.Shared/MyBlog.Shared.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "MyBlog.Shared >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Blackerback\\.nuget\\packages\\": {},
@@ -40,7 +59,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Blackerback\\OneDrive\\Masaüstü\\MyBlog\\MyBlog.Shared\\MyBlog.Shared.csproj": {
+              "projectPath": "C:\\Users\\Blackerback\\OneDrive\\Masaüstü\\MyBlog\\MyBlog.Shared\\MyBlog.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
