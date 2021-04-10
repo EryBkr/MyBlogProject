@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyBlog.Data.Concrete.EntityFramework.Mappings
 {
-   public class CommentMap : IEntityTypeConfiguration<Comment>
+    public class CommentMap : IEntityTypeConfiguration<Comment>
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
@@ -30,6 +30,37 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
             builder.HasOne<Article>(c => c.Article).WithMany(a => a.Comments).HasForeignKey(c => c.ArticleId);
 
             builder.ToTable("Comments");
+
+
+            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
+            //HasData o tabloya ait data yoksa oluşacak
+            builder.HasData(
+                new Comment
+                {
+                    Id=1,
+                    ArticleId=1,
+                    Text="C# Yorumu",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "Initial Create",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "Initial Create",
+                    ModifiedDate = DateTime.Now,
+                    Note="Makale Yorumu",
+                },
+                new Comment
+                {
+                    Id = 2,
+                    ArticleId = 2,
+                    Text = ".Net Core MVC Yorumu",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "Initial Create",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "Initial Create",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Makale Yorumu",
+                });
         }
     }
 }

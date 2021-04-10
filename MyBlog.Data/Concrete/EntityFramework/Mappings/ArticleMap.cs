@@ -15,7 +15,7 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
         {
             //PK Belirlendi
             builder.HasKey(i => i.Id);
-            
+
             //Eklendikçe değer oluştur
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
             builder.Property(i => i.Title).HasMaxLength(100);
@@ -47,10 +47,56 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
             //Relationships
             builder.HasOne<Category>(a => a.Category).WithMany(c => c.Articles).HasForeignKey(a => a.CategoryId);
             builder.HasOne<User>(a => a.User).WithMany(u => u.Articles).HasForeignKey(a => a.UserId);
-            
+
             builder.ToTable("Articles");
 
-
+            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
+            //HasData o tabloya ait data yoksa oluşacak
+            builder.HasData(
+                new Article
+                {
+                    Id = 1,
+                    CategoryId = 1,
+                    Title = "C# 9.0 Yenilikleri",
+                    Content = "Makale ile ilgili içerikler",
+                    Thumbnail = "Default.jpg",
+                    SeoDescription = "C# 9.0 Yenilikleri",
+                    SeoTags = "C#,Net Core,Web,MVC",
+                    SeoAuthor = "Eray Bakır",
+                    Date = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "Initial Create",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "Initial Create",
+                    ModifiedDate = DateTime.Now,
+                    Note = "C# Yenilikleriyle ilgili Makale",
+                    UserId = 1,
+                    ViewsCount = 50,
+                    CommentsCount = 1
+                },
+                new Article
+                {
+                    Id = 2,
+                    CategoryId = 2,
+                    Title = ".Net Core Yenilikleri",
+                    Content = "Makale ile ilgili içerikler",
+                    Thumbnail = "Default.jpg",
+                    SeoDescription = ".Net Core Yenilikleri",
+                    SeoTags = "C#,Net Core,Web,MVC",
+                    SeoAuthor = "Eray Bakır",
+                    Date = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "Initial Create",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "Initial Create",
+                    ModifiedDate = DateTime.Now,
+                    Note = ".Net Core Yenilikleriyle ilgili Makale",
+                    UserId = 1,
+                    ViewsCount = 100,
+                    CommentsCount = 2
+                });
 
         }
     }

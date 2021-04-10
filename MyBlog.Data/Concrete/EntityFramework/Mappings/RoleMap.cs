@@ -32,6 +32,23 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
             builder.ToTable("Roles");
 
 
+            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
+            //HasData o tabloya ait data yoksa oluşacak
+            builder.HasData(new Role 
+            {
+                 Id=1,
+                 Name="Admin",
+                 Description="Tüm erişimlere açıktır",
+                 IsActive=true,
+                 IsDeleted=false,
+                 CreatedByName="Initial Create",
+                 CreatedDate=DateTime.Now,
+                 ModifiedByName="Initial Create",
+                 ModifiedDate=DateTime.Now,
+                 Note="Admin Rolü"
+            });
+
+
         }
     }
 }

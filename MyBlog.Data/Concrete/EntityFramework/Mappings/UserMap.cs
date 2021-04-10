@@ -42,6 +42,28 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
 
             builder.HasOne<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleId);
             builder.ToTable("Users");
+
+            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
+            //HasData o tabloya ait data yoksa oluşacak
+            builder.HasData(new User 
+            {
+                Id=1,
+                RoleId=1,
+                FirstName="Eray",
+                LastName="Bakır",
+                Username="Blackerback",
+                Email="eray.bkr94@gmail.com",
+                Picture= "https://picsum.photos/150",
+                IsActive =true,
+                IsDeleted=false,
+                CreatedByName="Initial Create",
+                CreatedDate=DateTime.Now,
+                ModifiedByName="Initial Create",
+                ModifiedDate=DateTime.Now,
+                Description="Admin Kullanıcısı",
+                Note="Admin Kullanıcısı",
+                PasswordHash= Encoding.ASCII.GetBytes("202cb962ac59075b964b07152d234b70") //123 ün MD5 ile şifrelennmiş hali
+            });
         }
     }
 }

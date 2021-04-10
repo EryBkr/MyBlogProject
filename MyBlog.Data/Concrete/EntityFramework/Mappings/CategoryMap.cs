@@ -29,7 +29,50 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.Note).HasMaxLength(500);
 
             builder.ToTable("Categories");
-           
+
+            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
+            //HasData o tabloya ait data yoksa oluşacak
+            builder.HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "C#",
+                    Description = "C# Programlama Diliyle İlgili Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "Initial Create",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "Initial Create",
+                    ModifiedDate = DateTime.Now,
+                    Note = "C# Blog Kategorisi"
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = ".Net Core MVC",
+                    Description = ".Net Core MVC ile İlgili Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "Initial Create",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "Initial Create",
+                    ModifiedDate = DateTime.Now,
+                    Note = ".Net Core MVC Blog Kategorisi"
+                },
+                 new Category
+                 {
+                     Id = 3,
+                     Name = "Javascript",
+                     Description = "Javascript ile İlgili Bilgiler",
+                     IsActive = true,
+                     IsDeleted = false,
+                     CreatedByName = "Initial Create",
+                     CreatedDate = DateTime.Now,
+                     ModifiedByName = "Initial Create",
+                     ModifiedDate = DateTime.Now,
+                     Note = "Javascript Blog Kategorisi"
+                 });
+
 
 
         }
