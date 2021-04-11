@@ -31,9 +31,11 @@ namespace MyBlog.Services.Concrete
             category.CreatedByName = createdByName;
             category.ModifiedByName = createdByName;
 
-            await _unitOfWork.Categories.AddAsync(category).ContinueWith(t=>_unitOfWork.SaveAsync()); //Hemen ardından save işlemi yapılması için kullandık
+            await _unitOfWork.Categories.AddAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+            await _unitOfWork.SaveAsync();
 
-            
+
+
             return new Result(ResultStatus.Success, $"{categoryAddDto.Name} adlı kategori başarıyla eklenmiştir");
         }
 
@@ -45,8 +47,8 @@ namespace MyBlog.Services.Concrete
                 category.IsDeleted = true;
                 category.ModifiedByName = modifiedByName;
                 category.ModifiedDate = DateTime.Now;
-                await _unitOfWork.Categories.UpdateAsync(category).ContinueWith(t=>_unitOfWork.SaveAsync());
-
+                await _unitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await _unitOfWork.SaveAsync();
                 return new Result(ResultStatus.Success, $"{category.Name} adlı kategori başarıyla silinmiştir");
             }
 
@@ -79,7 +81,12 @@ namespace MyBlog.Services.Concrete
                     ResultStatus = ResultStatus.Success
                 });
             }
-            return new DataResult<CategoryListDto>(ResultStatus.Error, null, "Hiç bir kategori bulunamadı");
+            return new DataResult<CategoryListDto>(ResultStatus.Error, new CategoryListDto 
+            {
+                Categories=null,
+                ResultStatus=ResultStatus.Error,
+                Message= "Hiç bir kategori bulunamadı"
+            }, "Hiç bir kategori bulunamadı");
         }
 
         public async Task<IDataResult<CategoryListDto>> GetAllByNonDeleted()
@@ -116,7 +123,8 @@ namespace MyBlog.Services.Concrete
             if (category != null)
             {
                
-                await _unitOfWork.Categories.DeleteAsync(category).ContinueWith(t => _unitOfWork.SaveAsync());
+                await _unitOfWork.Categories.DeleteAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await _unitOfWork.SaveAsync();
 
                 return new Result(ResultStatus.Success, $"{category.Name} adlı kategori başarıyla silinmiştir (Hard)");
             }
@@ -131,7 +139,8 @@ namespace MyBlog.Services.Concrete
 
             if (category != null)
             {
-                await _unitOfWork.Categories.UpdateAsync(category).ContinueWith(t=>_unitOfWork.SaveAsync());
+                await _unitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await _unitOfWork.SaveAsync();
                 return new Result(ResultStatus.Success, $"{category.Name} adlı kategori başarıyla güncellenmiştir");
             }
             return new Result(ResultStatus.Error, "Böyle bir kategori bulunamadı");
