@@ -398,3 +398,4 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razo
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_LayoutJsPartial.cshtml.g.cs
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_LayoutSideBarPartial.cshtml.g.cs
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\_CategoryAddPartial.cshtml.g.cs

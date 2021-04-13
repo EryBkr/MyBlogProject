@@ -9,6 +9,8 @@ using MyBlog.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyBlog.Mvc
@@ -25,7 +27,15 @@ namespace MyBlog.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation(); //RazorRuntime kütüphanesi watch gibi çalýþýr,deðiþiklikleri anlýk olarak görebiliriz
+            //RazorRuntime kütüphanesi watch gibi çalýþýr,deðiþiklikleri anlýk olarak görebiliriz
+            //AddJsonOptions kýsmýnda json iletimi ile ilgili konfigürasyonlarý tanýmlýyoruz
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt=> 
+            {
+                //Enum kullanýmý için ekledik
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                //Ýçiçe json datalar için ekledik
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            }); 
 
             //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz extension sýnýfýmýz
             services.LoadMyServices();

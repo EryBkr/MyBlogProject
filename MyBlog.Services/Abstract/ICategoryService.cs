@@ -15,8 +15,12 @@ namespace MyBlog.Services.Abstract
         Task<IDataResult<CategoryListDto>> GetAll();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeleted();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActive();
-        Task<IResult> Add(CategoryAddDto categoryAddDto,string createdByName);
-        Task<IResult> Update(CategoryUpdateDto categoryUpdateDto,string modifiedByName);
+
+        //Ekleme ve güncelleme işlemlerinde gerekli datayı geri dönmemiz gerekiyor.
+        Task<IDataResult<CategoryDto>> Add(CategoryAddDto categoryAddDto,string createdByName);
+        Task<IDataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto,string modifiedByName);
+
+
         //IsDeleted True
         Task<IResult> Delete(int categoryId, string modifiedByName);
         //Database Remove Yapılır

@@ -17,7 +17,7 @@ namespace MyBlog.Entities.Dtos.CategoryDtos
         public string Name { get; set; }
 
 
-        [DisplayName("Kategori Açıklamazı")]
+        [DisplayName("Kategori Açıklaması")]
         [MaxLength(500, ErrorMessage = "{0} {1} karakterden büyük olamaz")]
         [MinLength(3, ErrorMessage = "{0} {1} karakterden az olamaz")]
         public string Description { get; set; }
