@@ -12,6 +12,7 @@ namespace MyBlog.Services.Abstract
     public interface ICategoryService
     {
         Task<IDataResult<CategoryDto>> Get(int categoryId);
+        Task<IDataResult<CategoryUpdateDto>> GetUpdateDto(int categoryId);
         Task<IDataResult<CategoryListDto>> GetAll();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeleted();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActive();
@@ -22,7 +23,7 @@ namespace MyBlog.Services.Abstract
 
 
         //IsDeleted True
-        Task<IResult> Delete(int categoryId, string modifiedByName);
+        Task<IDataResult<CategoryDto>> Delete(int categoryId, string modifiedByName);
         //Database Remove Yapılır
         Task<IResult> HardDelete(int categoryId);
     }
