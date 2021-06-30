@@ -4,7 +4,6 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\bin\Debug\net5.0
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\bin\Debug\net5.0\MyBlog.Entities.pdb
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\bin\Debug\net5.0\MyBlog.Shared.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\bin\Debug\net5.0\MyBlog.Shared.pdb
-C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.csprojAssemblyReference.cache
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.AssemblyInfoInputs.cache
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.AssemblyInfo.cs
@@ -13,3 +12,4 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\ref\MyBlog.Entities.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.pdb
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Entities\obj\Debug\net5.0\MyBlog.Entities.csproj.AssemblyReference.cache

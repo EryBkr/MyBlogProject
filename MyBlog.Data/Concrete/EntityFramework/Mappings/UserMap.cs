@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyBlog.Entities.Concrete;
 using System;
@@ -13,57 +14,87 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            // Primary key
             builder.HasKey(u => u.Id);
-            builder.Property(u => u.Id).ValueGeneratedOnAdd();
-            builder.Property(u => u.Email).IsRequired();
-            builder.Property(u => u.Email).HasMaxLength(50);
-            builder.HasIndex(u => u.Email).IsUnique();
-            builder.Property(u => u.Username).IsRequired();
-            builder.Property(u => u.Username).HasMaxLength(20);
-            builder.HasIndex(u => u.Username).IsUnique();
-            builder.Property(u => u.PasswordHash).IsRequired();
-            builder.Property(u => u.PasswordHash).HasColumnType("VARBINARY(500)");
-            builder.Property(u => u.Description).HasMaxLength(500);
-            builder.Property(u => u.FirstName).IsRequired();
-            builder.Property(u => u.FirstName).HasMaxLength(30);
-            builder.Property(u => u.LastName).IsRequired();
-            builder.Property(u => u.LastName).HasMaxLength(30);
+
+            // Indexes for "normalized" username and email, to allow efficient lookups
+            builder.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
+            builder.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
+
+            // Maps to the AspNetUsers table
+            builder.ToTable("AspNetUsers");
+
+            // A concurrency token for use with the optimistic concurrency checking
+            builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
+
+            // Limit the size of columns to use efficient database types
+            builder.Property(u => u.UserName).HasMaxLength(50);
+            builder.Property(u => u.NormalizedUserName).HasMaxLength(50);
+            builder.Property(u => u.Email).HasMaxLength(100);
+            builder.Property(u => u.NormalizedEmail).HasMaxLength(100);
+
+            // The relationships between User and other entity types
+            // Note that these relationships are configured with no navigation properties
+
+            // Each User can have many UserClaims
+            builder.HasMany<UserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+
+            // Each User can have many UserLogins
+            builder.HasMany<UserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+
+            // Each User can have many UserTokens
+            builder.HasMany<UserLogin>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
+
+            // Each User can have many entries in the UserRole join table
+            builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
             builder.Property(u => u.Picture).IsRequired();
             builder.Property(u => u.Picture).HasMaxLength(250);
-            builder.Property(u => u.CreatedByName).IsRequired();
-            builder.Property(u => u.CreatedByName).HasMaxLength(50);
-            builder.Property(u => u.ModifiedByName).IsRequired();
-            builder.Property(u => u.ModifiedByName).HasMaxLength(50);
-            builder.Property(u => u.CreatedDate).IsRequired();
-            builder.Property(u => u.ModifiedDate).IsRequired();
-            builder.Property(u => u.IsActive).IsRequired();
-            builder.Property(u => u.IsDeleted).IsRequired();
-            builder.Property(u => u.Note).HasMaxLength(500);
 
-            builder.HasOne<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleId);
-            builder.ToTable("Users");
-
-            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
-            //HasData o tabloya ait data yoksa oluşacak
-            builder.HasData(new User 
+            //Database Oluşurken Gerekli Kullanıcıları da beraberinde oluşturuyoruz ki Production ortamında problem yaşamayalım
+            var adminUser = new User
             {
-                Id=1,
-                RoleId=1,
-                FirstName="Eray",
-                LastName="Bakır",
-                Username="Blackerback",
-                Email="eray.bkr94@gmail.com",
-                Picture= "https://picsum.photos/150",
-                IsActive =true,
-                IsDeleted=false,
-                CreatedByName="Initial Create",
-                CreatedDate=DateTime.Now,
-                ModifiedByName="Initial Create",
-                ModifiedDate=DateTime.Now,
-                Description="Admin Kullanıcısı",
-                Note="Admin Kullanıcısı",
-                PasswordHash= Encoding.ASCII.GetBytes("202cb962ac59075b964b07152d234b70") //123 ün MD5 ile şifrelennmiş hali
-            });
+                Id = 1,
+                UserName = "adminuser",
+                NormalizedUserName = "ADMINUSER",
+                Email = "crazyeray94@gmail.com",
+                NormalizedEmail = "CRAZYERAY94@GMAIL.COM",
+                PhoneNumber = "5555555555555",
+                Picture = "defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            //Parola Hash leme işlemi için kullanıcı bilgileride gerekiyor.Ondan kaynaklı bu işlemi dışarıda tanımladık
+            adminUser.PasswordHash = CreatePasswordHash(adminUser, "adminuser");
+
+
+
+            var editorUser = new User
+            {
+                Id = 2,
+                UserName = "editoruser",
+                NormalizedUserName = "EDITORUSER",
+                Email = "editor@gmail.com",
+                NormalizedEmail = "editor@GMAIL.COM",
+                PhoneNumber = "5555555555555",
+                Picture = "defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            editorUser.PasswordHash = CreatePasswordHash(editorUser, "editoruser");
+
+            builder.HasData(adminUser, editorUser);
         }
+
+        //Parola Hash İşlemi
+        private string CreatePasswordHash(User user, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>(); //Identity Tarafından Gelen Hash leyici
+            return passwordHasher.HashPassword(user, password);
+        }
+
     }
 }

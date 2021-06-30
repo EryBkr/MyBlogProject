@@ -15,8 +15,6 @@ namespace MyBlog.Data.Concrete
         
         private EfArticleRepository _articleRepository;
         private EfCommentRepository _commentRepository;
-        private EfRoleRepository _roleRepository;
-        private EfUserRepository _userRepository;
         private EfCategoryRepository _categoryRepository;
 
 
@@ -31,11 +29,6 @@ namespace MyBlog.Data.Concrete
         public ICategoryRepository Categories => _categoryRepository ?? new EfCategoryRepository(_context);
 
         public ICommentRepository Comments => _commentRepository ?? new EfCommentRepository(_context);
-
-        public IRoleRepository Roles => _roleRepository ?? new EfRoleRepository(_context);
-
-        public IUserRepository Users => _userRepository ?? new EfUserRepository(_context);
-
 
         //GarbageCollector ı tetiklemek için oluşturduğumuz bir yapı
         public async ValueTask DisposeAsync()

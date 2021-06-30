@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyBlog.Mvc.AutoMapper.Profiles;
 using MyBlog.Services.AutoMapper.Profiles;
 using MyBlog.Services.Extensions;
 using System;
@@ -29,18 +31,37 @@ namespace MyBlog.Mvc
         {
             //RazorRuntime kütüphanesi watch gibi çalýþýr,deðiþiklikleri anlýk olarak görebiliriz
             //AddJsonOptions kýsmýnda json iletimi ile ilgili konfigürasyonlarý tanýmlýyoruz
-            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt=> 
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt =>
             {
                 //Enum kullanýmý için ekledik
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 //Ýçiçe json datalar için ekledik
                 opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-            }); 
+            });
+
+            services.AddSession();
 
             //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz extension sýnýfýmýz
             services.LoadMyServices();
 
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile));
+            //Cookie Ayarlarý
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = new PathString("/Admin/User/Login");//Yetki yok ise buraya yönlendiriyoruz
+                opt.LogoutPath = new PathString("/Admin/User/Logout");
+                opt.Cookie = new CookieBuilder
+                {
+                    Name = "MyBlog",
+                    HttpOnly = true,//UI Tarafýndan cookie lere eriþilememesi için tanýmlýyoruz XSS önleniyor
+                    SameSite=SameSiteMode.Strict,//CRSF Ataðýný önlemek için kullanýlýr.Cookie kendi sitemizden gelmelidir
+                    SecurePolicy=CookieSecurePolicy.SameAsRequest,//HTTP den istek gelirse HTTP olarak HTTPS den istek gelirse ona uygun olarak dönülür.Olmasý Gereken Always dir
+                };
+                opt.SlidingExpiration = true;//Süre sýfýrlamasýný saðlar
+                opt.ExpireTimeSpan = System.TimeSpan.FromDays(7);
+                opt.AccessDeniedPath= new PathString("/Admin/User/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
+            });
+
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,12 +79,15 @@ namespace MyBlog.Mvc
                 app.UseHsts();
             }
 
+            app.UseSession();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication(); //Kimlik kontrolü
+            app.UseAuthorization(); //Yetkilendirme
 
             app.UseEndpoints(endpoints =>
             {

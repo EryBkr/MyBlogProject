@@ -37,16 +37,16 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
             builder.HasData(
                 new Comment
                 {
-                    Id=1,
-                    ArticleId=1,
-                    Text="C# Yorumu",
+                    Id = 1,
+                    ArticleId = 1,
+                    Text = "C# Yorumu",
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "Initial Create",
                     CreatedDate = DateTime.Now,
                     ModifiedByName = "Initial Create",
                     ModifiedDate = DateTime.Now,
-                    Note="Makale Yorumu",
+                    Note = "Makale Yorumu",
                 },
                 new Comment
                 {
