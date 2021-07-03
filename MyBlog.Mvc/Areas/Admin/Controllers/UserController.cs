@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.UserDtos;
 using MyBlog.Mvc.Areas.Admin.Models;
+using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Utilities;
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -24,18 +21,16 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly IWebHostEnvironment _env; //Dosya yoluna dinamik ulaşabilmek için ekledik 
         private readonly IMapper _mapper;
         private readonly SignInManager<User> _signInManager;
+        private readonly IImageHelper _imageHelper;
 
-
-
-        public UserController(UserManager<User> userManager, IMapper mapper, IWebHostEnvironment env, SignInManager<User> signInManager)
+        public UserController(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager, IImageHelper imageHelper)
         {
             _userManager = userManager;
             _mapper = mapper;
-            _env = env;
             _signInManager = signInManager;
+            _imageHelper = imageHelper;
         }
 
         [Authorize(Roles = "Admin")]
@@ -88,7 +83,6 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
 
         }
 
-
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Logout()
@@ -126,7 +120,11 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                userAddDto.Picture = await ImageUpload(userAddDto.UserName, userAddDto.PictureFile); //Resim kaydedilip ismi dto ya veriliyor
+                var uploadedImageDtoResult = await _imageHelper.UploadUserImage(userAddDto.UserName, userAddDto.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+
+                //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
+                userAddDto.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
+
                 var user = _mapper.Map<User>(userAddDto);
 
                 var result = await _userManager.CreateAsync(user, userAddDto.Password);
@@ -219,8 +217,15 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 var oldUserPicture = oldUser.Picture;//Silinecek Resmi aldık
                 if (model.PictureFile != null) //Kullanıcı Yeni Resim Eklemiş
                 {
-                    model.Picture = await ImageUpload(model.UserName, model.PictureFile);
-                    isNewPictureUploaded = true;
+                    var uploadedImageDtoResult = await _imageHelper.UploadUserImage(model.UserName, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+
+                    //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
+                    model.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
+
+                    if (oldUserPicture!= "userImages/defaultUser.png")
+                    {
+                        isNewPictureUploaded = true;
+                    }
                 }
                 var updatedUser = _mapper.Map<UserUpdateDto, User>(model, oldUser);
                 var result = await _userManager.UpdateAsync(updatedUser);
@@ -229,7 +234,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 {
                     if (isNewPictureUploaded) //Yeni Resim ekleme işlemi başarılı mı?
                     {
-                        ImageDelete(oldUserPicture);
+                        _imageHelper.Delete(oldUserPicture);
                     }
                     var userUpdateViewModel = JsonSerializer.Serialize(new UserUpdateAjaxViewModel
                     {
@@ -268,27 +273,6 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,Editor")]
-        public async Task<string> ImageUpload(string userName, IFormFile pictureFile)
-        {
-            string wwwroot = _env.WebRootPath; //Dosya yolunu dinamik olarak aldık
-
-            string fileExtension = Path.GetExtension(pictureFile.FileName); //resmin uzantısını aldık
-
-            var dateTime = DateTime.Now; //O an ki zamanı isimlendirme için aldık
-
-            string fileName = $"{userName}_{dateTime.FullDateAndTimeStringUnderscore()}.{fileExtension}"; //UserName_DateTimeNow.jpg gibi
-
-            var path = Path.Combine($"{wwwroot}/img", fileName);
-
-            //Uzantısı ile birlikte dosya ve o dosyaya uygulanacak işlemi belirtiyoruz
-            await using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await pictureFile.CopyToAsync(stream);
-            }
-            return fileName; //Oluşan resim adını aldık
-        }
-
         [HttpGet]
         [Authorize]
         public async Task<ViewResult> ChangeDetails()
@@ -309,11 +293,14 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 var oldUserPicture = oldUser.Picture;//Silinecek Resmi aldık
                 if (model.PictureFile != null) //Kullanıcı Yeni Resim Eklemiş
                 {
-                    model.Picture = await ImageUpload(model.UserName, model.PictureFile);
+                    var uploadedImageDtoResult = await _imageHelper.UploadUserImage(model.UserName, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+
+                    //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
+                    model.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
 
                     //Kullanıcının mevcut resmi,sistemin default olarak atadığı resim ise silmiyoruz.Diğer default resim kullanıcıları resimsiz kalır diğer türlü
-                    if (oldUserPicture != "defaultUser.png")
-                        isNewPictureUploaded = true;
+                    if (oldUserPicture != "userImages/defaultUser.png")
+                            isNewPictureUploaded = true;
                 }
 
                 var updatedUser = _mapper.Map<UserUpdateDto, User>(model, oldUser);
@@ -322,7 +309,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 if (result.Succeeded) //Güncelleme işlemi başarılı mı 
                 {
                     if (isNewPictureUploaded) //Yeni Resim ekleme işlemi başarılı mı?
-                        ImageDelete(oldUserPicture);
+                        _imageHelper.Delete(oldUserPicture);
 
 
                     TempData.Add("SuccessMessage", $"{updatedUser.UserName} adlı kullanıcı başarıyla güncellenmiştir");
@@ -344,7 +331,6 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 return View(model);
             }
         }
-
 
         [Authorize]
         [HttpGet]
@@ -380,45 +366,28 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                         await _signInManager.SignOutAsync();
 
                         //Tekrar giriş işlemi yaptırıyoruz
-                        await _signInManager.PasswordSignInAsync(user,model.NewPassword,true,false);
+                        await _signInManager.PasswordSignInAsync(user, model.NewPassword, true, false);
 
-                        TempData.Add("SuccessMessage","Şifre Değişikliği Başarılı bir şekilde gerçekleşti");
+                        TempData.Add("SuccessMessage", "Şifre Değişikliği Başarılı bir şekilde gerçekleşti");
                     }
                     else
                     {
-                        TempData.Add("ErrorMessage", "Şifre Değişikliği sırasında bir hata gerçekleşti");
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
+                        return View(model);
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("","Lütfen girmiş olduğunuz şifrenizi kontrol ediniz");
+                    ModelState.AddModelError("", "Lütfen girmiş olduğunuz şifrenizi kontrol ediniz");
                     TempData.Add("ErrorMessage", "Şifre Değişikliği sırasında bir hata gerçekleşti");
                     return View(model);
                 }
             }
             return View(model);
         }
-
-
-        [Authorize(Roles = "Admin,Editor")]
-        //Kullanıcı resmini değiştirirse eski resmin server da kalmaması gerekiyor
-        public bool ImageDelete(string pictureName)
-        {
-            string wwwroot = _env.WebRootPath; //Dosya yolunu dinamik olarak aldık
-            var fileToDelete = Path.Combine($"{wwwroot}/img", pictureName);//domain.com/img/picture.jpg
-
-            if (System.IO.File.Exists(fileToDelete))//Klasörde o dosya mevcut mu?
-            {
-                System.IO.File.Delete(fileToDelete);//dosya siliniyor
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
 
         //Kişinin yetkisi yok ise bu sayfaya yönlendireleceğiz
         [HttpGet]
@@ -427,7 +396,5 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         {
             return View();
         }
-
-
     }
 }

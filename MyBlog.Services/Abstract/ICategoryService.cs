@@ -11,20 +11,37 @@ namespace MyBlog.Services.Abstract
 {
     public interface ICategoryService
     {
-        Task<IDataResult<CategoryDto>> Get(int categoryId);
-        Task<IDataResult<CategoryUpdateDto>> GetUpdateDto(int categoryId);
-        Task<IDataResult<CategoryListDto>> GetAll();
-        Task<IDataResult<CategoryListDto>> GetAllByNonDeleted();
-        Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActive();
+        Task<IDataResult<CategoryDto>> GetAsync(int categoryId);
+
+        /// <summary>
+        /// Verilen Id parametresine ait kategorinin CategoryUpdateDto temsilini geriye döner
+        /// </summary>
+        /// <param name="categoryId">0 dan büyük integer bir ID değeri</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
+        Task<IDataResult<CategoryUpdateDto>> GetUpdateDtoAsync(int categoryId);
+        Task<IDataResult<CategoryListDto>> GetAllAsync();
+        Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync();
+        Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync();
 
         //Ekleme ve güncelleme işlemlerinde gerekli datayı geri dönmemiz gerekiyor.
-        Task<IDataResult<CategoryDto>> Add(CategoryAddDto categoryAddDto,string createdByName);
-        Task<IDataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto,string modifiedByName);
+        /// <summary>
+        /// Verilen CategoryAddDto yu veritabanına Category tipinde kaydeder
+        /// </summary>
+        /// <param name="categoryAddDto">Category tipini elde edeceğimiz parametredir</param>
+        /// <param name="createdByName">Category i kimin eklediğini belirten parametredir</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
+        Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto categoryAddDto,string createdByName);
+
+
+        Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto categoryUpdateDto,string modifiedByName);
 
 
         //IsDeleted True
-        Task<IDataResult<CategoryDto>> Delete(int categoryId, string modifiedByName);
+        Task<IDataResult<CategoryDto>> DeleteAsync(int categoryId, string modifiedByName);
         //Database Remove Yapılır
-        Task<IResult> HardDelete(int categoryId);
+        Task<IResult> HardDeleteAsync(int categoryId);
+
+        Task<IDataResult<int>> CountAsync();
+        Task<IDataResult<int>> CountByIsNonDeletedAsync();
     }
 }

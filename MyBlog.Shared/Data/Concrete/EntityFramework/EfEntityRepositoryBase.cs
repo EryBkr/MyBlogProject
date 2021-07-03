@@ -13,8 +13,8 @@ namespace MyBlog.Shared.Data.Concrete.EntityFramework
     public class EfEntityRepositoryBase<TEntity> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
     {
-
-        private readonly DbContext _context;
+        //Protected olarak tanımladığımız _context kalıtım alınan class lardan erişip gerekli harici metotlarda db işlemleri yapabiliyoruz
+        protected readonly DbContext _context;
 
         public EfEntityRepositoryBase(DbContext context)
         {
@@ -32,9 +32,10 @@ namespace MyBlog.Shared.Data.Concrete.EntityFramework
             return await _context.Set<TEntity>().AnyAsync(predicate);
         }
 
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate=null)
         {
-            return await _context.Set<TEntity>().CountAsync(predicate);
+            //Filte yok ise bütün kayıtların sayısı bizlere dönecektir
+            return await (predicate==null ? _context.Set<TEntity>().CountAsync() : _context.Set<TEntity>().CountAsync(predicate));
         }
 
         public async Task DeleteAsync(TEntity entity)
@@ -61,16 +62,14 @@ namespace MyBlog.Shared.Data.Concrete.EntityFramework
             }
 
             return await query.ToListAsync();
-            
+
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             //İstek Database e gitmeden sorguları biriktirmek için bir yapı kurduk
             IQueryable<TEntity> query = _context.Set<TEntity>();
-
-            if (predicate != null)
-                query = query.Where(predicate);
+            query = query.Where(predicate);
 
             //Include edilmesi istenen bir yapı var ise include işlemleri sağlanacaktır
             if (includeProperties.Any())

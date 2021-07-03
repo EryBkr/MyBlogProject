@@ -1,19 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyBlog.Mvc.AutoMapper.Profiles;
+using MyBlog.Mvc.Helpers.Abstract;
+using MyBlog.Mvc.Helpers.Concrete;
 using MyBlog.Services.AutoMapper.Profiles;
 using MyBlog.Services.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace MyBlog.Mvc
 {
@@ -41,8 +37,10 @@ namespace MyBlog.Mvc
 
             services.AddSession();
 
-            //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz extension sýnýfýmýz
-            services.LoadMyServices();
+            //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz ve connection String bilgisini verdiðimiz extension sýnýfýmýz
+            services.LoadMyServices(Configuration.GetConnectionString("LocalDB"));
+            //Resim iþlemleri için oluþturduðumuz class ý implemente ettik
+            services.AddScoped<IImageHelper, ImageHelper>();
 
             //Cookie Ayarlarý
             services.ConfigureApplicationCookie(opt =>

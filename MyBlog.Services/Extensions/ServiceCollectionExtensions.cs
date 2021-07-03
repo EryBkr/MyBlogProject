@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MyBlog.Data.Abstract;
 using MyBlog.Data.Concrete;
 using MyBlog.Data.Concrete.EntityFramework.Contexts;
@@ -15,9 +16,9 @@ namespace MyBlog.Services.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection LoadMyServices(this IServiceCollection serviceDescriptors)
+        public static IServiceCollection LoadMyServices(this IServiceCollection serviceDescriptors,string connectionString)
         {
-            serviceDescriptors.AddDbContext<MyBlogContext>();
+            serviceDescriptors.AddDbContext<MyBlogContext>(opt=>opt.UseSqlServer(connectionString));
             serviceDescriptors.AddIdentity<User, Role>(opt=> 
             {
                 //Password Options
@@ -34,6 +35,7 @@ namespace MyBlog.Services.Extensions
             serviceDescriptors.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceDescriptors.AddScoped<ICategoryService, CategoryManager>();
             serviceDescriptors.AddScoped<IArticleService, ArticleManager>();
+            serviceDescriptors.AddScoped<ICommentService, CommentManager>();
 
             return serviceDescriptors;
         }

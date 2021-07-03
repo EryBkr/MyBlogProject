@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyBlog.Services</name>
+    </assembly>
+    <members>
+        <member name="M:MyBlog.Services.Abstract.ICategoryService.GetUpdateDtoAsync(System.Int32)">
+            <summary>
+            Verilen Id parametresine ait kategorinin CategoryUpdateDto temsilini geriye döner
+            </summary>
+            <param name="categoryId">0 dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
+        </member>
+        <member name="M:MyBlog.Services.Abstract.ICategoryService.AddAsync(MyBlog.Entities.Dtos.CategoryDtos.CategoryAddDto,System.String)">
+            <summary>
+            Verilen CategoryAddDto yu veritabanına Category tipinde kaydeder
+            </summary>
+            <param name="categoryAddDto">Category tipini elde edeceğimiz parametredir</param>
+            <param name="createdByName">Category i kimin eklediğini belirten parametredir</param>
+            <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.CategoryManager.AddAsync(MyBlog.Entities.Dtos.CategoryDtos.CategoryAddDto,System.String)">
+            <summary>
+            Verilen CategoryAddDto yu veritabanına Category tipinde kaydeder
+            </summary>
+            <param name="categoryAddDto">Category tipini elde edeceğimiz parametredir</param>
+            <param name="createdByName">Category i kimin eklediğini belirten parametredir</param>
+            <returns>Asenkron bir operasyon ile Task olarak ekleme işleminin sonucunu DataResult tipinde geri döner</returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.CategoryManager.GetUpdateDtoAsync(System.Int32)">
+            <summary>
+            Verilen Id parametresine ait kategorinin CategoryUpdateDto temsilini geriye döner
+            </summary>
+            <param name="categoryId">0 dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.NotFound(System.Boolean)">
+            <summary>
+            Kategorinin çoğul mu tekil mi olduğuna göre dönen mesaj değişecektir
+            </summary>
+            <param name="isPlural"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.Add(System.String)">
+            <summary>
+            Kategori ekleme işlemi başarılı ise...
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.Delete(System.String)">
+            <summary>
+            Kategori silme işlemi başarılı ise...
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.DeleteError">
+            <summary>
+            Kategori silme işlemi başarısız ise...
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.Update(System.String)">
+            <summary>
+            Günceleme işlemi başarılı ise
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.NotFound(System.Boolean)">
+            <summary>
+            Makalenin çoğul mu tekil mi olduğuna göre dönen mesaj değişecektir
+            </summary>
+            <param name="isPlural"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.NotFoundByCategory">
+            <summary>
+            Makalenin çoğul mu tekil mi olduğuna göre dönen mesaj değişecektir
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.Add(System.String)">
+            <summary>
+            Makale ekleme işlemi başarılı ise...
+            </summary>
+            <param name="articleName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.Delete(System.String)">
+            <summary>
+            Kategori silme işlemi başarılı ise...
+            </summary>
+            <param name="articleName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.Update(System.String)">
+            <summary>
+            Kategori silme işlemi başarılı ise...
+            </summary>
+            <param name="articleName"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -412,3 +412,5 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\MyBl
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\UserMenu\Default.cshtml.g.cs
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\User\ChangeDetails.cshtml.g.cs
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\User\PasswordChange.cshtml.g.cs
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Views\Shared\_LayoutComingSoon.cshtml.g.cs
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\MyBlog.Services.xml

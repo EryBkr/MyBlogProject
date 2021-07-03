@@ -14,9 +14,9 @@ namespace MyBlog.Data.Concrete.EntityFramework.Contexts
     public class MyBlogContext : IdentityDbContext<User,Role,int,UserClaim,UserRole,UserLogin,RoleClaim,UserToken>
     {
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public MyBlogContext(DbContextOptions<MyBlogContext> opt):base(opt)
         {
-            optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\MSSQLLocalDB;Database=MyBlogDB;Trusted_Connection=true;");
+
         }
 
         //Tablo tanımlamalarını ve ilişkilerini belirledik

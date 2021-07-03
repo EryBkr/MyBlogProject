@@ -5,5 +5,11 @@
 function convertToShortDate(dateString) {
     const shortDate = new Date(dateString).toLocaleDateString("tr-TR");
     return shortDate;
+}
 
+function convertToBoolean(boolString) {
+    if (boolString==="True") {
+        return "Evet";
+    }
+    return "Hayır";
 }
