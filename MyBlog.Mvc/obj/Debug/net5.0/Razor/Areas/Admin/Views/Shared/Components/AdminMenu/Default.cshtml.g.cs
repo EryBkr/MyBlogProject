@@ -35,13 +35,20 @@ using MyBlog.Entities.Dtos.UserDtos;
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Dtos.ArticleDtos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"34abcad79cbbfe31d4b55d728f38180f30ecf333", @"/Areas/Admin/Views/Shared/Components/AdminMenu/Default.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e8c0468806a5d67cb62045f764f9b73f41616680", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a1c129303044eca62b08ff155147dbc6c3d713f8", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Shared_Components_AdminMenu_Default : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<UserWithRolesViewModels>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -84,7 +91,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             <div class=""nav"">
                 <div class=""sb-sidenav-menu-heading"">Menu</div>
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf3336827", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf3337043", async() => {
                 WriteLiteral("\r\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>\r\n                 Yönetim Paneli\r\n                ");
             }
             );
@@ -105,7 +112,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                <div class=\"sb-sidenav-menu-heading\">İçerikler</div>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf3338711", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf3338927", async() => {
                 WriteLiteral("\r\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-th-list\"></i></div>\r\n                    Kategoriler\r\n                ");
             }
             );
@@ -126,7 +133,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33310514", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33310730", async() => {
                 WriteLiteral("\r\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-file-alt\"></i></div>\r\n                    Makaleler\r\n                ");
             }
             );
@@ -147,7 +154,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33312317", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33312533", async() => {
                 WriteLiteral("\r\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-comments\"></i></div>\r\n                    Yorumlar\r\n                ");
             }
             );
@@ -177,7 +184,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
 #line hidden
 #nullable disable
             WriteLiteral("                    <div class=\"sb-sidenav-menu-heading\">Kullanıcılar</div>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33314516", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33314732", async() => {
                 WriteLiteral("\r\n                        <div class=\"sb-nav-link-icon\"><i class=\"fas fa-user-shield\"></i></div>\r\n                        Roller\r\n                    ");
             }
             );
@@ -199,7 +206,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
             WriteLiteral("                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33316366", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34abcad79cbbfe31d4b55d728f38180f30ecf33316582", async() => {
                 WriteLiteral("\r\n                        <div class=\"sb-nav-link-icon\"><i class=\"fas fa-users\"></i></div>\r\n                        Kullanıcılar\r\n                    ");
             }
             );

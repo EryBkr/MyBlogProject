@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyBlog.Entities.ComplexTypes;
 using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.UserDtos;
 using MyBlog.Mvc.Areas.Admin.Models;
 using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Utilities;
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
+using NToastNotify;
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -24,13 +26,15 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly SignInManager<User> _signInManager;
         private readonly IImageHelper _imageHelper;
+        private readonly IToastNotification _toastNotification;
 
-        public UserController(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager, IImageHelper imageHelper)
+        public UserController(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager, IImageHelper imageHelper, IToastNotification toastNotification)
         {
             _userManager = userManager;
             _mapper = mapper;
             _signInManager = signInManager;
             _imageHelper = imageHelper;
+            _toastNotification = toastNotification;
         }
 
         [Authorize(Roles = "Admin")]
@@ -120,7 +124,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var uploadedImageDtoResult = await _imageHelper.UploadUserImage(userAddDto.UserName, userAddDto.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+                var uploadedImageDtoResult = await _imageHelper.UploadImage(userAddDto.UserName,PictureType.User ,userAddDto.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
 
                 //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
                 userAddDto.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
@@ -217,7 +221,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 var oldUserPicture = oldUser.Picture;//Silinecek Resmi aldık
                 if (model.PictureFile != null) //Kullanıcı Yeni Resim Eklemiş
                 {
-                    var uploadedImageDtoResult = await _imageHelper.UploadUserImage(model.UserName, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+                    var uploadedImageDtoResult = await _imageHelper.UploadImage(model.UserName,PictureType.User,model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
 
                     //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
                     model.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
@@ -293,7 +297,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 var oldUserPicture = oldUser.Picture;//Silinecek Resmi aldık
                 if (model.PictureFile != null) //Kullanıcı Yeni Resim Eklemiş
                 {
-                    var uploadedImageDtoResult = await _imageHelper.UploadUserImage(model.UserName, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+                    var uploadedImageDtoResult = await _imageHelper.UploadImage(model.UserName, PictureType.User, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
 
                     //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
                     model.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
@@ -311,8 +315,9 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                     if (isNewPictureUploaded) //Yeni Resim ekleme işlemi başarılı mı?
                         _imageHelper.Delete(oldUserPicture);
 
-
-                    TempData.Add("SuccessMessage", $"{updatedUser.UserName} adlı kullanıcı başarıyla güncellenmiştir");
+                    //Toastr mesajımızı oluşturduk
+                    _toastNotification.AddSuccessToastMessage($"{updatedUser.UserName} adlı kullanıcı başarıyla güncellenmiştir");
+                  
 
                     return View(model);
                 }
@@ -368,7 +373,8 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                         //Tekrar giriş işlemi yaptırıyoruz
                         await _signInManager.PasswordSignInAsync(user, model.NewPassword, true, false);
 
-                        TempData.Add("SuccessMessage", "Şifre Değişikliği Başarılı bir şekilde gerçekleşti");
+                        //Toastr mesajımızı oluşturduk
+                        _toastNotification.AddSuccessToastMessage("Şifre Değişikliği Başarılı bir şekilde gerçekleşti");
                     }
                     else
                     {
@@ -382,7 +388,10 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Lütfen girmiş olduğunuz şifrenizi kontrol ediniz");
-                    TempData.Add("ErrorMessage", "Şifre Değişikliği sırasında bir hata gerçekleşti");
+
+                    //Toastr mesajımızı oluşturduk
+                    _toastNotification.AddErrorToastMessage("Şifre Değişikliği sırasında bir hata gerçekleşti");
+              
                     return View(model);
                 }
             }

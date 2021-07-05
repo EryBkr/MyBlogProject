@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using MyBlog.Entities.ComplexTypes;
 using MyBlog.Entities.Dtos.FileDtos;
 using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Utilities;
@@ -18,6 +19,8 @@ namespace MyBlog.Mvc.Helpers.Concrete
         private readonly IWebHostEnvironment _env; //Dosya yoluna dinamik ulaşabilmek için ekledik 
         private readonly string _wwwRoot;
         private readonly string imgFolder = "img";
+        private const string userImagesFolder = "userImages";
+        private const string postImagesFolder = "postImages";
 
         public ImageHelper(IWebHostEnvironment env)
         {
@@ -34,36 +37,39 @@ namespace MyBlog.Mvc.Helpers.Concrete
                 var fileInfo = new FileInfo(fileToDelete);
 
                 //Resim silindikten sonra fileInfo değerlerine ulaşamadığımızdan dolayı silinmeden önce gerekli bilgileri alıyoruz
-                var imageDeletedDto = new ImageDeleteDto 
+                var imageDeletedDto = new ImageDeleteDto
                 {
-                    FullName=pictureName,
-                    Extension=fileInfo.Extension,
-                    FullPath=fileInfo.FullName,
-                    Size=fileInfo.Length
+                    FullName = pictureName,
+                    Extension = fileInfo.Extension,
+                    FullPath = fileInfo.FullName,
+                    Size = fileInfo.Length
                 };
 
                 System.IO.File.Delete(fileToDelete);//dosya siliniyor
-                return new DataResult<ImageDeleteDto>(ResultStatus.Success,imageDeletedDto);
+                return new DataResult<ImageDeleteDto>(ResultStatus.Success, imageDeletedDto);
             }
             else
             {
-                return new DataResult<ImageDeleteDto>(ResultStatus.Error,null,$"{pictureName} adlı resim bulunamadı");
+                return new DataResult<ImageDeleteDto>(ResultStatus.Error, null, $"{pictureName} adlı resim bulunamadı");
             }
         }
 
-        public async Task<IDataResult<ImageUploadDto>> UploadUserImage(string userName, IFormFile pictureFile, string folderName="userImages")
+        public async Task<IDataResult<ImageUploadDto>> UploadImage(string name, PictureType
+             pictureType, IFormFile pictureFile, string folderName = null)
         {
+            //Verilen Resim tipine göre klasör ismi ataması yapıyoruz
+            folderName ??= pictureType == PictureType.User ? userImagesFolder : postImagesFolder;
 
             //Verilen klasör ismine ait bir klasör var mı?
             if (!Directory.Exists($"{_wwwRoot}/{imgFolder}/{folderName}"))
-                    Directory.CreateDirectory($"{_wwwRoot}/{imgFolder}/{folderName}"); //verilen klasör yok ise oluşturuyoruz
+                Directory.CreateDirectory($"{_wwwRoot}/{imgFolder}/{folderName}"); //verilen klasör yok ise oluşturuyoruz
 
             string oldFileName = Path.GetFileNameWithoutExtension(pictureFile.FileName);
             string fileExtension = Path.GetExtension(pictureFile.FileName); //resmin uzantısını aldık
 
             var dateTime = DateTime.Now; //O an ki zamanı isimlendirme için aldık
 
-            string newFileName = $"{userName}_{dateTime.FullDateAndTimeStringUnderscore()}{fileExtension}"; //UserName_DateTimeNow.jpg gibi
+            string newFileName = $"{name}_{dateTime.FullDateAndTimeStringUnderscore()}{fileExtension}"; //UserName_DateTimeNow.jpg gibi
 
             var path = Path.Combine($"{_wwwRoot}/{imgFolder}/{folderName}", newFileName);
 
@@ -71,6 +77,8 @@ namespace MyBlog.Mvc.Helpers.Concrete
             await using (var stream = new FileStream(path, FileMode.Create))
                 await pictureFile.CopyToAsync(stream);
 
+            //Resim Tipine göre başarı mesajı değişkenlik gösterecektir
+            string message = pictureType == PictureType.User ? $"{name} adlı kullanıcının resmi başarıyla yüklenmiştir" : $"{name} adlı makalenin resmi başarıyla yüklenmiştir";
 
             return new DataResult<ImageUploadDto>(ResultStatus.Success, new ImageUploadDto
             {
@@ -80,7 +88,7 @@ namespace MyBlog.Mvc.Helpers.Concrete
                 FolderName = folderName,
                 Path = path,
                 Size = pictureFile.Length
-            }, $"{userName} adlı kullanıcının resmi başarıyla yüklenmiştir");
+            }, message);
         }
     }
 }

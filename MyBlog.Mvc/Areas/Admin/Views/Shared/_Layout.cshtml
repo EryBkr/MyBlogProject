@@ -9,7 +9,13 @@
     <title>@ViewBag.Title - Admin Paneli</title>
 
     @* CSS Dosyalarımızı partial'a ekleyip kullanıyoruz *@
-  @await Html.PartialAsync("_LayoutCssPartial")
+    @await Html.PartialAsync("_LayoutCssPartial")
+
+    @*Sayfaya özel css leri burada yüklüyoruz*@
+    @await RenderSectionAsync("Styles", false)
+
+    @*Siteye özgü yazdığımız  CSS ler diğer kütüphanelerden sonra yüklensin diye bu şekilde kullandık*@ 
+    <link href="~/adminLTE/css/site.css" rel="stylesheet" />
 
 </head>
 <body class="sb-nav-fixed">
@@ -29,24 +35,12 @@
         @await Component.InvokeAsync("UserMenu")
     </nav>
     <div id="layoutSidenav">
-     @await Component.InvokeAsync("AdminMenu")
+        @await Component.InvokeAsync("AdminMenu")
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
 
-                    @*Action içerisinde oluşturulan mesajları gösteriyoruz*@
-                    @if (TempData["SuccessMessage"] != null)
-                    {
-                        <div class="alert alert-success my-3" role="alert">
-                            @TempData["SuccessMessage"].ToString()
-                        </div>
-                    }
-                    @if (TempData["ErrorMessage"] != null)
-                    {
-                        <div class="alert alert-danger my-3" role="alert">
-                            @TempData["ErrorMessage"].ToString()
-                        </div>
-                    }
+
 
                     @RenderBody()
                 </div>
@@ -68,5 +62,8 @@
     @await Html.PartialAsync("_LayoutJsPartial")
 
     @await RenderSectionAsync("Scripts", false)
+
+    @*Action içerisinde oluşturulan NToastr mesajlarını gösteriyoruz*@
+    @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

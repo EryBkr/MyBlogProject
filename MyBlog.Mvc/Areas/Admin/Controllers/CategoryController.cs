@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.CategoryDtos;
 using MyBlog.Mvc.Areas.Admin.Models;
+using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Utilities;
 using MyBlog.Services.Abstract;
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using NToastNotify;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -15,12 +17,12 @@ using System.Threading.Tasks;
 namespace MyBlog.Mvc.Areas.Admin.Controllers
 {
     [Area(areaName: "Admin")]
-    [Authorize(Roles ="Admin,Editor")]
-    public class CategoryController : Controller
+    [Authorize(Roles = "Admin,Editor")]
+    public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper, IImageHelper imageHelper, UserManager<User> userManager,IToastNotification toastNotification) : base(userManager, mapper, imageHelper, toastNotification)
         {
             _categoryService = categoryService;
         }
@@ -44,17 +46,18 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _categoryService.AddAsync(categoryAddDto, "Eray Bakır");
+                //LoggedInUser Field ı base class aracılığıyla bize gelmektedir
+                var result = await _categoryService.AddAsync(categoryAddDto, LoggedInUser.UserName);
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    var categoryAjaxModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel 
+                    var categoryAjaxModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
                     {
-                        CategoryDto=result.Data,
-                        CategoryAddPartial=await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
+                        CategoryDto = result.Data,
+                        CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
                     });
 
                     return Json(categoryAjaxModel);
-                }    
+                }
             }
 
             var categoryAjaxInvalidrModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
@@ -65,21 +68,20 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             return Json(categoryAjaxInvalidrModel);
         }
 
-       public async Task<JsonResult> GetAllCategories()
+        public async Task<JsonResult> GetAllCategories()
         {
             //IsDeleted==false olan kategorileri alacağız
             var result = await _categoryService.GetAllByNonDeletedAsync();
-            var categories = JsonSerializer.Serialize(result.Data,new JsonSerializerOptions {ReferenceHandler= ReferenceHandler.Preserve});
+            var categories = JsonSerializer.Serialize(result.Data, new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve });
 
             return Json(categories);
 
         }
 
-
         [HttpPost]
         public async Task<JsonResult> Delete(int categoryId)
         {
-            var result = await _categoryService.DeleteAsync(categoryId,"Eray Bakır");
+            var result = await _categoryService.DeleteAsync(categoryId, "Eray Bakır");
             var deletedCategory = JsonSerializer.Serialize(result.Data);
 
             return Json(deletedCategory);
@@ -89,24 +91,25 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int categoryId)
         {
-            var result = await _categoryService.GetUpdateDtoAsync(categoryId:categoryId);
-            if (result.ResultStatus==ResultStatus.Success)
+            var result = await _categoryService.GetUpdateDtoAsync(categoryId: categoryId);
+            if (result.ResultStatus == ResultStatus.Success)
             {
-                return PartialView("_CategoryUpdatePartial",result.Data);
+                return PartialView("_CategoryUpdatePartial", result.Data);
             }
             else
             {
                 return NotFound();
             }
-            
+
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
         {
             if (ModelState.IsValid)
-            {
-                var result = await _categoryService.UpdateAsync(categoryUpdateDto, "Eray Bakır");
+            { 
+                //LoggedInUser Field ı base class aracılığıyla bize gelmektedir
+                var result = await _categoryService.UpdateAsync(categoryUpdateDto, LoggedInUser.UserName);
                 if (result.ResultStatus == ResultStatus.Success)
                 {
                     var categoryAjaxModel = JsonSerializer.Serialize(new CategoryUpdateAjaxViewModel

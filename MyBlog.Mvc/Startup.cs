@@ -9,6 +9,7 @@ using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Helpers.Concrete;
 using MyBlog.Services.AutoMapper.Profiles;
 using MyBlog.Services.Extensions;
+using NToastNotify;
 using System.Text.Json.Serialization;
 
 namespace MyBlog.Mvc
@@ -27,7 +28,11 @@ namespace MyBlog.Mvc
         {
             //RazorRuntime kütüphanesi watch gibi çalýþýr,deðiþiklikleri anlýk olarak görebiliriz
             //AddJsonOptions kýsmýnda json iletimi ile ilgili konfigürasyonlarý tanýmlýyoruz
-            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt =>
+            //Toastr Mesajlarýný C# tarafýnda oluþturabilmemizi saðlayan yapýyý konfigüre ettik
+            services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptions 
+            {
+                TimeOut=5000
+            }).AddRazorRuntimeCompilation().AddJsonOptions(opt =>
             {
                 //Enum kullanýmý için ekledik
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -59,7 +64,8 @@ namespace MyBlog.Mvc
                 opt.AccessDeniedPath= new PathString("/Admin/User/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
             });
 
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile));
+            //AutoMappper Profile Class larýmýzý burada tanýmladýk
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile), typeof(ViewModelsProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +92,10 @@ namespace MyBlog.Mvc
 
             app.UseAuthentication(); //Kimlik kontrolü
             app.UseAuthorization(); //Yetkilendirme
+
+
+            //Toastr Mesajlarýný C# tarafýnda oluþturabilmemizi saðlayan kütüphaneyi projemize ekledik
+            app.UseNToastNotify();
 
             app.UseEndpoints(endpoints =>
             {

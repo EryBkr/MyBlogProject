@@ -414,3 +414,11 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razo
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\User\PasswordChange.cshtml.g.cs
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Views\Shared\_LayoutComingSoon.cshtml.g.cs
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\MyBlog.Services.xml
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Article\Index.cshtml.g.cs
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Article\Add.cshtml.g.cs
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\obj\Debug\net5.0\Razor\Areas\Admin\Views\Article\Update.cshtml.g.cs
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\MyBlog.Mvc.StaticWebAssets.xml
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\NToastNotify.Views.dll
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\bin\Debug\net5.0\NToastNotify.dll

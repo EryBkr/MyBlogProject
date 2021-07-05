@@ -26,12 +26,12 @@ namespace MyBlog.Services.Concrete
             _mapper = mapper;
         }
 
-        public async Task<IResult> AddAsync(ArticleAddDto articleAddDto, string createdByName)
+        public async Task<IResult> AddAsync(ArticleAddDto articleAddDto, string createdByName, int userId)
         {
             var article = _mapper.Map<Article>(articleAddDto);
             article.CreatedByName = createdByName;
             article.ModifiedByName = createdByName;
-            article.UserId = 1;
+            article.UserId = userId; //Tablo ilişkisi için ekledik
 
             await _unitOfWork.Articles.AddAsync(article);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
             await _unitOfWork.SaveAsync();
@@ -160,7 +160,10 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IResult> UpdateAsync(ArticleUpdateDto articleUpdateDto, string modifiedByName)
         {
-            var article = _mapper.Map<Article>(articleUpdateDto);
+            var oldArticle = await _unitOfWork.Articles.GetAsync(i=>i.Id==articleUpdateDto.Id);
+
+            //Güncelleme esnasında bütün propertyler için giriş yapmıyoruz.Bundan dolayı eski makale üzerine yeni bilgileri yazmak ve değişmeyen bilgileri kaybetmemek için eski makalenin üzerine map ediyoruz
+            var article = _mapper.Map<ArticleUpdateDto,Article>(articleUpdateDto,oldArticle);
             article.ModifiedByName = modifiedByName;
 
             await _unitOfWork.Articles.UpdateAsync(article);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
@@ -194,6 +197,19 @@ namespace MyBlog.Services.Concrete
             {
                 return new DataResult<int>(ResultStatus.Error, 0, "Beklenmeyen bir hata ile karşılaşıldı");
             }
+        }
+
+        public async Task<IDataResult<ArticleUpdateDto>> GetArticleUpdateDtoAsync(int articleId)
+        {
+            //Verilen  Id ye ait kategori var mı?
+            var result = await _unitOfWork.Articles.AnyAsync(i => i.Id == articleId);
+            if (result)
+            {
+                var article = await _unitOfWork.Articles.GetAsync(c => c.Id == articleId);
+                var articleUpdateDto = _mapper.Map<ArticleUpdateDto>(article);
+                return new DataResult<ArticleUpdateDto>(ResultStatus.Success, articleUpdateDto);
+            }
+            return new DataResult<ArticleUpdateDto>(ResultStatus.Error, null, Messages.Article.NotFound(false));
         }
     }
 }
