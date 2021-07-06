@@ -65,7 +65,7 @@ namespace MyBlog.Mvc
             });
 
             //AutoMappper Profile Class larýmýzý burada tanýmladýk
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile), typeof(ViewModelsProfile));
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile), typeof(ViewModelsProfile), typeof(CommentProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

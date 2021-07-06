@@ -10,15 +10,15 @@ using MyBlog.Data.Concrete.EntityFramework.Contexts;
 namespace MyBlog.Data.Migrations
 {
     [DbContext(typeof(MyBlogContext))]
-    [Migration("20210629200214_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210705211631_SeedingCategories")]
+    partial class SeedingCategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("MyBlog.Entities.Concrete.Article", b =>
@@ -114,12 +114,12 @@ namespace MyBlog.Data.Migrations
                             CommentsCount = 1,
                             Content = "Makale ile ilgili içerikler",
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(5355),
-                            Date = new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(3786),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(6963),
+                            Date = new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(5817),
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(6169),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(7564),
                             Note = "C# Yenilikleriyle ilgili Makale",
                             SeoAuthor = "Eray Bakır",
                             SeoDescription = "C# 9.0 Yenilikleri",
@@ -136,12 +136,12 @@ namespace MyBlog.Data.Migrations
                             CommentsCount = 2,
                             Content = "Makale ile ilgili içerikler",
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(8044),
-                            Date = new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(8042),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(8932),
+                            Date = new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(8930),
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(8046),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(8934),
                             Note = ".Net Core Yenilikleriyle ilgili Makale",
                             SeoAuthor = "Eray Bakır",
                             SeoDescription = ".Net Core Yenilikleri",
@@ -204,12 +204,12 @@ namespace MyBlog.Data.Migrations
                         {
                             Id = 1,
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9325),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9672),
                             Description = "C# Programlama Diliyle İlgili Bilgiler",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9338),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9682),
                             Name = "C#",
                             Note = "C# Blog Kategorisi"
                         },
@@ -217,12 +217,12 @@ namespace MyBlog.Data.Migrations
                         {
                             Id = 2,
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9350),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9694),
                             Description = ".Net Core MVC ile İlgili Bilgiler",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9351),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9695),
                             Name = ".Net Core MVC",
                             Note = ".Net Core MVC Blog Kategorisi"
                         },
@@ -230,12 +230,12 @@ namespace MyBlog.Data.Migrations
                         {
                             Id = 3,
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9355),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9699),
                             Description = "Javascript ile İlgili Bilgiler",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9356),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9701),
                             Name = "Javascript",
                             Note = "Javascript Blog Kategorisi"
                         });
@@ -294,11 +294,11 @@ namespace MyBlog.Data.Migrations
                             Id = 1,
                             ArticleId = 1,
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2675),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(1943),
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2688),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(1953),
                             Note = "Makale Yorumu",
                             Text = "C# Yorumu"
                         },
@@ -307,11 +307,11 @@ namespace MyBlog.Data.Migrations
                             Id = 2,
                             ArticleId = 2,
                             CreatedByName = "Initial Create",
-                            CreatedDate = new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2701),
+                            CreatedDate = new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(2004),
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "Initial Create",
-                            ModifiedDate = new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2702),
+                            ModifiedDate = new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(2005),
                             Note = "Makale Yorumu",
                             Text = ".Net Core MVC Yorumu"
                         });
@@ -349,14 +349,14 @@ namespace MyBlog.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "89e90340-e90c-4edf-af4c-e399bd0c2f10",
+                            ConcurrencyStamp = "a494c847-c93e-4df4-aa06-8cefea66e0a2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "fe626ad5-795f-4a66-a898-42e65e9ba9e8",
+                            ConcurrencyStamp = "0bb76b42-6577-4851-86b7-d7411943b0c0",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         });
@@ -461,17 +461,17 @@ namespace MyBlog.Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8719ee96-8baf-461c-9f50-cf3b22489cc4",
-                            Email = "crazyeray94@gmail.com",
+                            ConcurrencyStamp = "fff84967-d36c-4d71-a96c-ebe2a109073b",
+                            Email = "adminuser@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "CRAZYERAY94@GMAIL.COM",
+                            NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPyuT8ORb9NrLkQtwhBxQlgwIvyDBOQ3rREX7KRLbiJNN+3k5m4i4c3oyf3MxbqsAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAiSwX/9X3cu8Py1oZgrVidyMKv4HfSNegDGN0P5y2Y44w0iQsnn8/FRlfM4XtGiWA==",
                             PhoneNumber = "5555555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "defaultUser.png",
-                            SecurityStamp = "36f9eb3f-40ae-42d7-9c1c-b761ea7fa160",
+                            SecurityStamp = "104a2994-022d-4966-a2a0-6da982feef3e",
                             TwoFactorEnabled = false,
                             UserName = "adminuser"
                         },
@@ -479,17 +479,17 @@ namespace MyBlog.Data.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "41b349a0-ee44-45a4-b04b-fbfc3344cade",
+                            ConcurrencyStamp = "86048a67-b4cb-4a1f-8370-2eb009180bb8",
                             Email = "editor@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "editor@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFTMqwR8ZmEvU8DtpYKEefflNMN9REMoC9vO+AAX3vniqumIzGu73T7LIfMUqlx0fA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMQHP+TTHtT0GWCVy9AapcMKdLChvfNJazbzgHhUt0YGvreoqUcfwNIGD9tdVi0zog==",
                             PhoneNumber = "5555555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "defaultUser.png",
-                            SecurityStamp = "f259b286-d209-4f0f-a8b8-8328bad198e5",
+                            SecurityStamp = "b6a90aad-1d00-4f13-8da9-d268580e1a67",
                             TwoFactorEnabled = false,
                             UserName = "editoruser"
                         });

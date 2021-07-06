@@ -15,15 +15,13 @@ using System.Threading.Tasks;
 
 namespace MyBlog.Services.Concrete
 {
-    public class CategoryManager : ICategoryService
+    public class CategoryManager : ManagerBase,ICategoryService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-
-        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper)
+       
+        //Dolu halleri Base Class ımızdan gelecektir
+        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper):base(unitOfWork,mapper)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+           
         }
 
         /// <summary>
@@ -34,12 +32,12 @@ namespace MyBlog.Services.Concrete
         /// <returns>Asenkron bir operasyon ile Task olarak ekleme işleminin sonucunu DataResult tipinde geri döner</returns>
         public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto categoryAddDto, string createdByName)
         {
-            var category = _mapper.Map<Category>(categoryAddDto);
+            var category = Mapper.Map<Category>(categoryAddDto);
             category.CreatedByName = createdByName;
             category.ModifiedByName = createdByName;
 
-            var addedCategory = await _unitOfWork.Categories.AddAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
-            await _unitOfWork.SaveAsync();
+            var addedCategory = await UnitOfWork.Categories.AddAsync(category);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+            await UnitOfWork.SaveAsync();
 
             return new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto
             {
@@ -52,7 +50,7 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<int>> CountAsync()
         {
-            var categoriesCount = await _unitOfWork.Categories.CountAsync();
+            var categoriesCount = await UnitOfWork.Categories.CountAsync();
             if (categoriesCount>-1)
             {
                 return new DataResult<int>(ResultStatus.Success,categoriesCount);
@@ -66,7 +64,7 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<int>> CountByIsNonDeletedAsync()
         {
-            var categoriesCount = await _unitOfWork.Categories.CountAsync(i => !i.IsDeleted);
+            var categoriesCount = await UnitOfWork.Categories.CountAsync(i => !i.IsDeleted);
             if (categoriesCount > -1)
             {
                 return new DataResult<int>(ResultStatus.Success, categoriesCount);
@@ -79,14 +77,14 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CategoryDto>> DeleteAsync(int categoryId, string modifiedByName)
         {
-            var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
             if (category != null)
             {
                 category.IsDeleted = true;
                 category.ModifiedByName = modifiedByName;
                 category.ModifiedDate = DateTime.Now;
-                var deletedCategory = await _unitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
-                await _unitOfWork.SaveAsync();
+                var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await UnitOfWork.SaveAsync();
 
                 return new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto
                 {
@@ -109,7 +107,7 @@ namespace MyBlog.Services.Concrete
         public async Task<IDataResult<CategoryDto>> GetAsync(int categoryId)
         {
 
-            var category = await _unitOfWork.Categories.GetAsync(i => i.Id == categoryId, i => i.Articles);
+            var category = await UnitOfWork.Categories.GetAsync(i => i.Id == categoryId, i => i.Articles);
             if (category != null)
             {
                 return new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto
@@ -128,7 +126,7 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CategoryListDto>> GetAllAsync()
         {
-            var categories = await _unitOfWork.Categories.GetAllAsync();
+            var categories = await UnitOfWork.Categories.GetAllAsync();
             if (categories.Count > -1)
             {
                 return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
@@ -147,7 +145,7 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync()
         {
-            var categories = await _unitOfWork.Categories.GetAllAsync(i => !i.IsDeleted);
+            var categories = await UnitOfWork.Categories.GetAllAsync(i => !i.IsDeleted);
             if (categories.Count > -1)
             {
                 return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
@@ -165,7 +163,7 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync()
         {
-            var categories = await _unitOfWork.Categories.GetAllAsync(i => !i.IsDeleted && i.IsActive);
+            var categories = await UnitOfWork.Categories.GetAllAsync(i => !i.IsDeleted && i.IsActive);
             if (categories.Count > -1)
             {
                 return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
@@ -189,11 +187,11 @@ namespace MyBlog.Services.Concrete
         public async Task<IDataResult<CategoryUpdateDto>> GetUpdateDtoAsync(int categoryId)
         {
             //Verilen  Id ye ait kategori var mı?
-            var result = await _unitOfWork.Categories.AnyAsync(i => i.Id == categoryId);
+            var result = await UnitOfWork.Categories.AnyAsync(i => i.Id == categoryId);
             if (result)
             {
-                var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
-                var categoryUpdateDto = _mapper.Map<CategoryUpdateDto>(category);
+                var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+                var categoryUpdateDto = Mapper.Map<CategoryUpdateDto>(category);
                 return new DataResult<CategoryUpdateDto>(ResultStatus.Success, categoryUpdateDto);
             }
             return new DataResult<CategoryUpdateDto>(ResultStatus.Error, null, Messages.Category.NotFound(false));
@@ -202,12 +200,12 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IResult> HardDeleteAsync(int categoryId)
         {
-            var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
             if (category != null)
             {
 
-                await _unitOfWork.Categories.DeleteAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
-                await _unitOfWork.SaveAsync();
+                await UnitOfWork.Categories.DeleteAsync(category);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await UnitOfWork.SaveAsync();
 
                 return new Result(ResultStatus.Success, $"{category.Name} adlı kategori başarıyla silinmiştir (Hard)");
             }
@@ -218,16 +216,16 @@ namespace MyBlog.Services.Concrete
         public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
         {
             //Güncelleme işlemine tabi tutmadığımız ama eski değerleri bize lazım olan (CreatedDate gibi)propertyleri kaybetmemek için dB den eski kategoriyi alıyoruz 
-            var oldCategory = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryUpdateDto.Id);
+            var oldCategory = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryUpdateDto.Id);
 
             //Her iki değeri birleştirip bize category tipinde property leri tam olan bir entity verecektir
-            var category = _mapper.Map<CategoryUpdateDto, Category>(categoryUpdateDto, oldCategory);
+            var category = Mapper.Map<CategoryUpdateDto, Category>(categoryUpdateDto, oldCategory);
             category.ModifiedByName = modifiedByName;
 
             if (category != null)
             {
-                var updatedCategory = await _unitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>_unitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
-                await _unitOfWork.SaveAsync();
+                var updatedCategory = await UnitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await UnitOfWork.SaveAsync();
 
                 return new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto
                 {

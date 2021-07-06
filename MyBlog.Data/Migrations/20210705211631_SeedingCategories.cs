@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyBlog.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class SeedingCategories : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -244,8 +244,8 @@ namespace MyBlog.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "89e90340-e90c-4edf-af4c-e399bd0c2f10", "Admin", "ADMIN" },
-                    { 2, "fe626ad5-795f-4a66-a898-42e65e9ba9e8", "Editor", "EDITOR" }
+                    { 1, "a494c847-c93e-4df4-aa06-8cefea66e0a2", "Admin", "ADMIN" },
+                    { 2, "0bb76b42-6577-4851-86b7-d7411943b0c0", "Editor", "EDITOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -253,8 +253,8 @@ namespace MyBlog.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "8719ee96-8baf-461c-9f50-cf3b22489cc4", "crazyeray94@gmail.com", true, false, null, "CRAZYERAY94@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEPyuT8ORb9NrLkQtwhBxQlgwIvyDBOQ3rREX7KRLbiJNN+3k5m4i4c3oyf3MxbqsAg==", "5555555555555", true, "defaultUser.png", "36f9eb3f-40ae-42d7-9c1c-b761ea7fa160", false, "adminuser" },
-                    { 2, 0, "41b349a0-ee44-45a4-b04b-fbfc3344cade", "editor@gmail.com", true, false, null, "editor@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEFTMqwR8ZmEvU8DtpYKEefflNMN9REMoC9vO+AAX3vniqumIzGu73T7LIfMUqlx0fA==", "5555555555555", true, "defaultUser.png", "f259b286-d209-4f0f-a8b8-8328bad198e5", false, "editoruser" }
+                    { 1, 0, "fff84967-d36c-4d71-a96c-ebe2a109073b", "adminuser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEAiSwX/9X3cu8Py1oZgrVidyMKv4HfSNegDGN0P5y2Y44w0iQsnn8/FRlfM4XtGiWA==", "5555555555555", true, "defaultUser.png", "104a2994-022d-4966-a2a0-6da982feef3e", false, "adminuser" },
+                    { 2, 0, "86048a67-b4cb-4a1f-8370-2eb009180bb8", "editor@gmail.com", true, false, null, "editor@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEMQHP+TTHtT0GWCVy9AapcMKdLChvfNJazbzgHhUt0YGvreoqUcfwNIGD9tdVi0zog==", "5555555555555", true, "defaultUser.png", "b6a90aad-1d00-4f13-8da9-d268580e1a67", false, "editoruser" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,9 +262,9 @@ namespace MyBlog.Data.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9325), "C# Programlama Diliyle İlgili Bilgiler", true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9338), "C#", "C# Blog Kategorisi" },
-                    { 2, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9350), ".Net Core MVC ile İlgili Bilgiler", true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9351), ".Net Core MVC", ".Net Core MVC Blog Kategorisi" },
-                    { 3, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9355), "Javascript ile İlgili Bilgiler", true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 879, DateTimeKind.Local).AddTicks(9356), "Javascript", "Javascript Blog Kategorisi" }
+                    { 1, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9672), "C# Programlama Diliyle İlgili Bilgiler", true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9682), "C#", "C# Blog Kategorisi" },
+                    { 2, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9694), ".Net Core MVC ile İlgili Bilgiler", true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9695), ".Net Core MVC", ".Net Core MVC Blog Kategorisi" },
+                    { 3, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9699), "Javascript ile İlgili Bilgiler", true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 850, DateTimeKind.Local).AddTicks(9701), "Javascript", "Javascript Blog Kategorisi" }
                 });
 
             migrationBuilder.InsertData(
@@ -272,8 +272,8 @@ namespace MyBlog.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "CommentsCount", "Content", "CreatedByName", "CreatedDate", "Date", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "SeoAuthor", "SeoDescription", "SeoTags", "Thumbnail", "Title", "UserId", "ViewsCount" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, "Makale ile ilgili içerikler", "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(5355), new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(3786), true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(6169), "C# Yenilikleriyle ilgili Makale", "Eray Bakır", "C# 9.0 Yenilikleri", "C#,Net Core,Web,MVC", "Default.jpg", "C# 9.0 Yenilikleri", 1, 50 },
-                    { 2, 2, 2, "Makale ile ilgili içerikler", "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(8044), new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(8042), true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 874, DateTimeKind.Local).AddTicks(8046), ".Net Core Yenilikleriyle ilgili Makale", "Eray Bakır", ".Net Core Yenilikleri", "C#,Net Core,Web,MVC", "Default.jpg", ".Net Core Yenilikleri", 1, 100 }
+                    { 1, 1, 1, "Makale ile ilgili içerikler", "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(6963), new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(5817), true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(7564), "C# Yenilikleriyle ilgili Makale", "Eray Bakır", "C# 9.0 Yenilikleri", "C#,Net Core,Web,MVC", "Default.jpg", "C# 9.0 Yenilikleri", 1, 50 },
+                    { 2, 2, 2, "Makale ile ilgili içerikler", "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(8932), new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(8930), true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 845, DateTimeKind.Local).AddTicks(8934), ".Net Core Yenilikleriyle ilgili Makale", "Eray Bakır", ".Net Core Yenilikleri", "C#,Net Core,Web,MVC", "Default.jpg", ".Net Core Yenilikleri", 1, 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -288,12 +288,12 @@ namespace MyBlog.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "ArticleId", "CreatedByName", "CreatedDate", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "Text" },
-                values: new object[] { 1, 1, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2675), true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2688), "Makale Yorumu", "C# Yorumu" });
+                values: new object[] { 1, 1, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(1943), true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(1953), "Makale Yorumu", "C# Yorumu" });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "ArticleId", "CreatedByName", "CreatedDate", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "Text" },
-                values: new object[] { 2, 2, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2701), true, false, "Initial Create", new DateTime(2021, 6, 29, 23, 2, 13, 878, DateTimeKind.Local).AddTicks(2702), "Makale Yorumu", ".Net Core MVC Yorumu" });
+                values: new object[] { 2, 2, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(2004), true, false, "Initial Create", new DateTime(2021, 7, 6, 0, 16, 30, 849, DateTimeKind.Local).AddTicks(2005), "Makale Yorumu", ".Net Core MVC Yorumu" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_CategoryId",

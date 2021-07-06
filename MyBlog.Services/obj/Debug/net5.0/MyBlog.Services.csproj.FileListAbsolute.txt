@@ -2,12 +2,14 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Services.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\ref\MyBlog.Services.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Services.pdb
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Services.xml
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Data.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Entities.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Shared.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Data.pdb
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Entities.pdb
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Shared.pdb
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.csproj.AssemblyReference.cache
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.AssemblyInfoInputs.cache
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.AssemblyInfo.cs
@@ -16,5 +18,3 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\ref\MyBlog.Services.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.pdb
-C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\obj\Debug\net5.0\MyBlog.Services.csproj.AssemblyReference.cache
-C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Services\bin\Debug\net5.0\MyBlog.Services.xml

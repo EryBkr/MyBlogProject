@@ -18,6 +18,10 @@ namespace MyBlog.Services.Extensions
     {
         public static IServiceCollection LoadMyServices(this IServiceCollection serviceDescriptors,string connectionString)
         {
+            //Connection String imiz appsettings te bulunduğu için migration işlemlerimizi Data katmanına gelerek ve başlangıç projesini UI olarak belirleyerek yapmamız gerekmektedir
+            //dotnet ef --startup-project.. /MyBlog.Mvc  migrations add SeedingCategories
+            //dotnet ef  --startup-project.. /MyBlog.Mvc database update
+
             serviceDescriptors.AddDbContext<MyBlogContext>(opt=>opt.UseSqlServer(connectionString));
             serviceDescriptors.AddIdentity<User, Role>(opt=> 
             {
