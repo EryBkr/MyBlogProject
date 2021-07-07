@@ -20,27 +20,19 @@ using System.Threading.Tasks;
 namespace MyBlog.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        private readonly UserManager<User> _userManager;
-        private readonly IMapper _mapper;
         private readonly SignInManager<User> _signInManager;
-        private readonly IImageHelper _imageHelper;
-        private readonly IToastNotification _toastNotification;
 
-        public UserController(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager, IImageHelper imageHelper, IToastNotification toastNotification)
+        public UserController(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager, IImageHelper imageHelper, IToastNotification toastNotification) : base(userManager, mapper, imageHelper, toastNotification)
         {
-            _userManager = userManager;
-            _mapper = mapper;
             _signInManager = signInManager;
-            _imageHelper = imageHelper;
-            _toastNotification = toastNotification;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Read")]
         public async Task<IActionResult> Index()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await UserManager.Users.ToListAsync();
             return View(new UserListDto
             {
                 Users = users,
@@ -48,58 +40,12 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             });
         }
 
+      
         [HttpGet]
-        public IActionResult Login()
-        {
-            return View("UserLogin");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(UserLoginDto model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user != null) //Kullanıcı mevcut mu
-                {
-                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
-
-                    if (result.Succeeded) //Giriş Başarılı mı?
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "E-Posta Adresiniz veya Şifreniz yanlıştır");
-                        return View("UserLogin");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "E-Posta Adresiniz veya Şifreniz yanlıştır");
-                    return View("UserLogin");
-                }
-            }
-            else
-            {
-                return View("UserLogin");
-            }
-
-        }
-
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home", new { @area = "" });
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Read")]
         public async Task<JsonResult> GetAllUsers()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await UserManager.Users.ToListAsync();
 
             var userListDto = JsonSerializer.Serialize(new UserListDto
             {
@@ -112,26 +58,26 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Create")]
         public IActionResult Add()
         {
             return PartialView("_UserAddPartial");
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Create")]
         public async Task<IActionResult> Add(UserAddDto userAddDto)
         {
             if (ModelState.IsValid)
             {
-                var uploadedImageDtoResult = await _imageHelper.UploadImage(userAddDto.UserName,PictureType.User ,userAddDto.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+                var uploadedImageDtoResult = await ImageHelper.UploadImage(userAddDto.UserName, PictureType.User, userAddDto.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
 
                 //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
                 userAddDto.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
 
-                var user = _mapper.Map<User>(userAddDto);
+                var user = Mapper.Map<User>(userAddDto);
 
-                var result = await _userManager.CreateAsync(user, userAddDto.Password);
+                var result = await UserManager.CreateAsync(user, userAddDto.Password);
                 if (result.Succeeded)
                 {
                     var userAddAjaxModel = JsonSerializer.Serialize(new UserAddAjaxViewModel
@@ -170,11 +116,11 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Delete")]
         public async Task<JsonResult> Delete(int userId)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            var result = await _userManager.DeleteAsync(user);
+            var user = await UserManager.FindByIdAsync(userId.ToString());
+            var result = await UserManager.DeleteAsync(user);
             if (result.Succeeded)
             {
                 var deletedUser = JsonSerializer.Serialize(new UserDto
@@ -202,43 +148,43 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Update")]
         public async Task<PartialViewResult> Update(int userId)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(i => i.Id == userId);
-            var userUpdateDto = _mapper.Map<UserUpdateDto>(user);
+            var user = await UserManager.Users.FirstOrDefaultAsync(i => i.Id == userId);
+            var userUpdateDto = Mapper.Map<UserUpdateDto>(user);
             return PartialView("_UserUpdatePartial", userUpdateDto);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin,User.Update")]
         public async Task<IActionResult> Update(UserUpdateDto model)
         {
             if (ModelState.IsValid)
             {
                 bool isNewPictureUploaded = false; //Resim ekleme işlemi başarılı mı ? Diğer türlü mevcut resmi kullanıcı resmi kaydedemeden silmiş oluruz
-                var oldUser = await _userManager.FindByIdAsync(model.Id.ToString());
+                var oldUser = await UserManager.FindByIdAsync(model.Id.ToString());
                 var oldUserPicture = oldUser.Picture;//Silinecek Resmi aldık
                 if (model.PictureFile != null) //Kullanıcı Yeni Resim Eklemiş
                 {
-                    var uploadedImageDtoResult = await _imageHelper.UploadImage(model.UserName,PictureType.User,model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+                    var uploadedImageDtoResult = await ImageHelper.UploadImage(model.UserName, PictureType.User, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
 
                     //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
                     model.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
 
-                    if (oldUserPicture!= "userImages/defaultUser.png")
+                    if (oldUserPicture != "userImages/defaultUser.png")
                     {
                         isNewPictureUploaded = true;
                     }
                 }
-                var updatedUser = _mapper.Map<UserUpdateDto, User>(model, oldUser);
-                var result = await _userManager.UpdateAsync(updatedUser);
+                var updatedUser = Mapper.Map<UserUpdateDto, User>(model, oldUser);
+                var result = await UserManager.UpdateAsync(updatedUser);
 
                 if (result.Succeeded) //Güncelleme işlemi başarılı mı 
                 {
                     if (isNewPictureUploaded) //Yeni Resim ekleme işlemi başarılı mı?
                     {
-                        _imageHelper.Delete(oldUserPicture);
+                        ImageHelper.Delete(oldUserPicture);
                     }
                     var userUpdateViewModel = JsonSerializer.Serialize(new UserUpdateAjaxViewModel
                     {
@@ -281,8 +227,8 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         [Authorize]
         public async Task<ViewResult> ChangeDetails()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            var updateDto = _mapper.Map<UserUpdateDto>(user);
+            var user = await UserManager.GetUserAsync(HttpContext.User);
+            var updateDto = Mapper.Map<UserUpdateDto>(user);
             return View(updateDto);
         }
 
@@ -293,31 +239,31 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 bool isNewPictureUploaded = false; //Resim ekleme işlemi başarılı mı ? Diğer türlü mevcut resmi kullanıcı resmi kaydedemeden silmiş oluruz
-                var oldUser = await _userManager.GetUserAsync(HttpContext.User);
+                var oldUser = await UserManager.GetUserAsync(HttpContext.User);
                 var oldUserPicture = oldUser.Picture;//Silinecek Resmi aldık
                 if (model.PictureFile != null) //Kullanıcı Yeni Resim Eklemiş
                 {
-                    var uploadedImageDtoResult = await _imageHelper.UploadImage(model.UserName, PictureType.User, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
+                    var uploadedImageDtoResult = await ImageHelper.UploadImage(model.UserName, PictureType.User, model.PictureFile); //Resim kaydedilip gerekli DTO yu dönüyoruz
 
                     //Resim yükleme işlemi başarılı değilse default bir resim gösteriyoruz
                     model.Picture = uploadedImageDtoResult.ResultStatus == ResultStatus.Success ? uploadedImageDtoResult.Data.FullName : "userImages/defaultUser.png";
 
                     //Kullanıcının mevcut resmi,sistemin default olarak atadığı resim ise silmiyoruz.Diğer default resim kullanıcıları resimsiz kalır diğer türlü
                     if (oldUserPicture != "userImages/defaultUser.png")
-                            isNewPictureUploaded = true;
+                        isNewPictureUploaded = true;
                 }
 
-                var updatedUser = _mapper.Map<UserUpdateDto, User>(model, oldUser);
-                var result = await _userManager.UpdateAsync(updatedUser);
+                var updatedUser = Mapper.Map<UserUpdateDto, User>(model, oldUser);
+                var result = await UserManager.UpdateAsync(updatedUser);
 
                 if (result.Succeeded) //Güncelleme işlemi başarılı mı 
                 {
                     if (isNewPictureUploaded) //Yeni Resim ekleme işlemi başarılı mı?
-                        _imageHelper.Delete(oldUserPicture);
+                        ImageHelper.Delete(oldUserPicture);
 
                     //Toastr mesajımızı oluşturduk
-                    _toastNotification.AddSuccessToastMessage($"{updatedUser.UserName} adlı kullanıcı başarıyla güncellenmiştir");
-                  
+                    ToastNotification.AddSuccessToastMessage($"{updatedUser.UserName} adlı kullanıcı başarıyla güncellenmiştir");
+
 
                     return View(model);
                 }
@@ -351,21 +297,21 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //Login olmuş user ı aldık
-                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var user = await UserManager.GetUserAsync(HttpContext.User);
 
                 //Kullanıcı şifresini hatırlıyor mu kontrol ediyoruz
-                var isVerified = await _userManager.CheckPasswordAsync(user, model.CurrentPassword);
+                var isVerified = await UserManager.CheckPasswordAsync(user, model.CurrentPassword);
 
                 //Şifresini Hatırlıyor ise
                 if (isVerified)
                 {
                     //şifre değişikliği işlemi yapılıyor
-                    var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                    var result = await UserManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
 
                     if (result.Succeeded)
                     {
                         //kullanıcı önemli bir değeri değiştirdi.Diğer cihazlarda ki cookie leri iptal etmek vb... durumlar için stamp değerini değiştiriyoruz.
-                        await _userManager.UpdateSecurityStampAsync(user);
+                        await UserManager.UpdateSecurityStampAsync(user);
 
                         //Şifre değiştirildiği için çıkış işlemi yaptırıyoruz
                         await _signInManager.SignOutAsync();
@@ -374,7 +320,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                         await _signInManager.PasswordSignInAsync(user, model.NewPassword, true, false);
 
                         //Toastr mesajımızı oluşturduk
-                        _toastNotification.AddSuccessToastMessage("Şifre Değişikliği Başarılı bir şekilde gerçekleşti");
+                        ToastNotification.AddSuccessToastMessage("Şifre Değişikliği Başarılı bir şekilde gerçekleşti");
                     }
                     else
                     {
@@ -390,20 +336,21 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Lütfen girmiş olduğunuz şifrenizi kontrol ediniz");
 
                     //Toastr mesajımızı oluşturduk
-                    _toastNotification.AddErrorToastMessage("Şifre Değişikliği sırasında bir hata gerçekleşti");
-              
+                    ToastNotification.AddErrorToastMessage("Şifre Değişikliği sırasında bir hata gerçekleşti");
+
                     return View(model);
                 }
             }
             return View(model);
         }
 
-        //Kişinin yetkisi yok ise bu sayfaya yönlendireleceğiz
+
+        [Authorize(Roles = "SuperAdmin,User.Read")]
         [HttpGet]
-        [Authorize]
-        public IActionResult AccessDenied()
+        public async Task<PartialViewResult> GetDetail(int userId)
         {
-            return View();
+            var user = await UserManager.Users.SingleOrDefaultAsync(u => u.Id == userId);
+            return PartialView("_GetDetailPartial", new UserDto { User = user });
         }
     }
 }

@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 namespace MyBlog.Mvc.Areas.Admin.Controllers
 {
     [Area(areaName: "Admin")]
-    [Authorize(Roles = "Admin,Editor")]
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
@@ -27,6 +26,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize(Roles = "SuperAdmin,Category.Read")]
         public async Task<IActionResult> Index()
         {
             //IsDeleted==false olan kategorileri alacağız
@@ -36,12 +36,14 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Category.Create")]
         public IActionResult Add()
         {
             return PartialView("_CategoryAddPartial");
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,CoCategorymment.Create")]
         public async Task<IActionResult> Add(CategoryAddDto categoryAddDto)
         {
             if (ModelState.IsValid)
@@ -68,6 +70,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             return Json(categoryAjaxInvalidrModel);
         }
 
+        [Authorize(Roles = "SuperAdmin,Category.Read")]
         public async Task<JsonResult> GetAllCategories()
         {
             //IsDeleted==false olan kategorileri alacağız
@@ -79,6 +82,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Category.Delete")]
         public async Task<JsonResult> Delete(int categoryId)
         {
             var result = await _categoryService.DeleteAsync(categoryId, "Eray Bakır");
@@ -89,6 +93,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Category.Update")]
         public async Task<IActionResult> Update(int categoryId)
         {
             var result = await _categoryService.GetUpdateDtoAsync(categoryId: categoryId);
@@ -104,6 +109,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Category.Update")]
         public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
         {
             if (ModelState.IsValid)

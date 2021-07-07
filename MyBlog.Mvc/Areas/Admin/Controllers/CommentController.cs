@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.Entities.Concrete;
@@ -26,13 +27,17 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         {
             _commentService = commentService;
         }
+
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Comment.Read")]
         public async Task<IActionResult> Index()
         {
             var result = await _commentService.GetAllByNonDeletedAsync();
             return View(result.Data);
         }
+
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Comment.Read")]
         public async Task<IActionResult> GetAllComments()
         {
             var result = await _commentService.GetAllByNonDeletedAsync();
@@ -44,6 +49,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Comment.Read")]
         public async Task<IActionResult> GetDetail(int commentId)
         {
             var result = await _commentService.GetAsync(commentId);
@@ -55,6 +61,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Comment.Delete")]
         public async Task<IActionResult> Delete(int commentId)
         {
             var result = await _commentService.DeleteAsync(commentId, LoggedInUser.UserName);
@@ -63,6 +70,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Comment.Update")]
         public async Task<IActionResult> Approve(int commentId)
         {
             var result = await _commentService.ApproveAsync(commentId, LoggedInUser.UserName);
@@ -73,6 +81,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Comment.Update")]
         public async Task<IActionResult> Update(int commentId)
         {
             var result = await _commentService.GetCommentUpdateDtoAsync(commentId);
@@ -85,7 +94,10 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                 return NotFound();
             }
         }
+
+
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Comment.Update")]
         public async Task<IActionResult> Update(CommentUpdateDto commentUpdateDto)
         {
             if (ModelState.IsValid)

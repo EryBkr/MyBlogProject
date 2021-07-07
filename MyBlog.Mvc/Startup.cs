@@ -50,8 +50,8 @@ namespace MyBlog.Mvc
             //Cookie Ayarlarý
             services.ConfigureApplicationCookie(opt =>
             {
-                opt.LoginPath = new PathString("/Admin/User/Login");//Yetki yok ise buraya yönlendiriyoruz
-                opt.LogoutPath = new PathString("/Admin/User/Logout");
+                opt.LoginPath = new PathString("/Admin/Auth/Login");//Yetki yok ise buraya yönlendiriyoruz
+                opt.LogoutPath = new PathString("/Admin/Auth/Logout");
                 opt.Cookie = new CookieBuilder
                 {
                     Name = "MyBlog",
@@ -61,7 +61,7 @@ namespace MyBlog.Mvc
                 };
                 opt.SlidingExpiration = true;//Süre sýfýrlamasýný saðlar
                 opt.ExpireTimeSpan = System.TimeSpan.FromDays(7);
-                opt.AccessDeniedPath= new PathString("/Admin/User/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
+                opt.AccessDeniedPath= new PathString("/Admin/Auth/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
             });
 
             //AutoMappper Profile Class larýmýzý burada tanýmladýk

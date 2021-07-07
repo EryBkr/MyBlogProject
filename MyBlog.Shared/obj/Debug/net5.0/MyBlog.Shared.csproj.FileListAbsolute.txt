@@ -2,7 +2,6 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\bin\Debug\net5.0\M
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\bin\Debug\net5.0\MyBlog.Shared.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\bin\Debug\net5.0\ref\MyBlog.Shared.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\bin\Debug\net5.0\MyBlog.Shared.pdb
-C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.csproj.AssemblyReference.cache
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.AssemblyInfoInputs.cache
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.AssemblyInfo.cs
@@ -10,3 +9,4 @@ C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\M
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\ref\MyBlog.Shared.dll
 C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.pdb
+C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Shared\obj\Debug\net5.0\MyBlog.Shared.csproj.AssemblyReference.cache

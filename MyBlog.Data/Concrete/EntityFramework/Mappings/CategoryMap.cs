@@ -27,54 +27,147 @@ namespace MyBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.IsActive).IsRequired();
             builder.Property(c => c.IsDeleted).IsRequired();
             builder.Property(c => c.Note).HasMaxLength(500);
-
             builder.ToTable("Categories");
 
-            //Id dahil bütün dataları eksiksiz vermemiz gerekiyor.
-            //HasData o tabloya ait data yoksa oluşacak
             builder.HasData(
                 new Category
                 {
                     Id = 1,
                     Name = "C#",
-                    Description = "C# Programlama Diliyle İlgili Bilgiler",
+                    Description = "C# Programlama Dili ile İlgili En Güncel Bilgiler",
                     IsActive = true,
                     IsDeleted = false,
-                    CreatedByName = "Initial Create",
+                    CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.Now,
-                    ModifiedByName = "Initial Create",
+                    ModifiedByName = "InitialCreate",
                     ModifiedDate = DateTime.Now,
-                    Note = "C# Blog Kategorisi"
+                    Note = "C# Blog Kategorisi",
                 },
                 new Category
                 {
                     Id = 2,
-                    Name = ".Net Core MVC",
-                    Description = ".Net Core MVC ile İlgili Bilgiler",
+                    Name = "C++",
+                    Description = "C++ Programlama Dili ile İlgili En Güncel Bilgiler",
                     IsActive = true,
                     IsDeleted = false,
-                    CreatedByName = "Initial Create",
+                    CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.Now,
-                    ModifiedByName = "Initial Create",
+                    ModifiedByName = "InitialCreate",
                     ModifiedDate = DateTime.Now,
-                    Note = ".Net Core MVC Blog Kategorisi"
+                    Note = "C++ Blog Kategorisi",
                 },
-                 new Category
-                 {
-                     Id = 3,
-                     Name = "Javascript",
-                     Description = "Javascript ile İlgili Bilgiler",
-                     IsActive = true,
-                     IsDeleted = false,
-                     CreatedByName = "Initial Create",
-                     CreatedDate = DateTime.Now,
-                     ModifiedByName = "Initial Create",
-                     ModifiedDate = DateTime.Now,
-                     Note = "Javascript Blog Kategorisi"
-                 });
 
-
-
+                new Category
+                {
+                    Id = 3,
+                    Name = "JavaScript",
+                    Description = "JavaScript Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "JavaScript Blog Kategorisi",
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Typescript",
+                    Description = "Typescript Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Typescript Blog Kategorisi",
+                }
+                ,
+                new Category
+                {
+                    Id = 5,
+                    Name = "Java",
+                    Description = "Java Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Java Blog Kategorisi",
+                }
+                ,
+                new Category
+                {
+                    Id = 6,
+                    Name = "Python",
+                    Description = "Python Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Python Blog Kategorisi",
+                }
+                ,
+                new Category
+                {
+                    Id = 7,
+                    Name = "Php",
+                    Description = "Php Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Php Blog Kategorisi",
+                }
+                ,
+                new Category
+                {
+                    Id = 8,
+                    Name = "Kotlin",
+                    Description = "Kotlin Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Kotlin Blog Kategorisi",
+                }
+                ,
+                new Category
+                {
+                    Id = 9,
+                    Name = "Swift",
+                    Description = "Swift Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Swift Blog Kategorisi",
+                }
+                ,
+                new Category
+                {
+                    Id = 10,
+                    Name = "Ruby",
+                    Description = "Ruby Programlama Dili ile İlgili En Güncel Bilgiler",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Ruby Blog Kategorisi",
+                }
+            );
         }
     }
 }

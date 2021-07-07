@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.Entities.ComplexTypes;
@@ -29,6 +30,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Article.Read")]
         public async Task<IActionResult> Index()
         {
             var result = await _articleService.GetAllByNonDeletedAsync();
@@ -38,6 +40,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Article.Create")]
         public async Task<IActionResult> Add()
         {
             var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
@@ -51,7 +54,9 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             return NotFound();
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Article.Create")]
         public async Task<IActionResult> Add(ArticleAddViewModel model)
         {
             if (ModelState.IsValid)
@@ -83,6 +88,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Article.Update")]
         public async Task<IActionResult> Update(int articleId)
         {
             var articleResult = await _articleService.GetArticleUpdateDtoAsync(articleId);
@@ -100,6 +106,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Article.Update")]
         public async Task<IActionResult> Update(ArticleUpdateViewModel model)
         {
             if (ModelState.IsValid)
@@ -156,6 +163,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Article.Delete")]
         public async Task<JsonResult> Delete(int articleId)
         {
             var result = await _articleService.DeleteAsync(articleId, LoggedInUser.UserName);
@@ -167,6 +175,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
 
         //Article Refresh Button
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Article.Read")]
         public async Task<JsonResult> GetAllArticles()
         {
             var article = await _articleService.GetAllByNonDeletedAndActiveAsync();

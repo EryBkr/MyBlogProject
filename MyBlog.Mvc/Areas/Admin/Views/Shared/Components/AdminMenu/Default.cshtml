@@ -7,7 +7,7 @@
                 <div class="sb-sidenav-menu-heading">Menu</div>
                 <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                 Yönetim Paneli
+                    Yönetim Paneli
                 </a>
                 <div class="sb-sidenav-menu-heading">İçerikler</div>
                 <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">
@@ -22,20 +22,30 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                     Yorumlar
                 </a>
-                @*Giriş yapan kullanıcı Admin Rolüne Sahip mi*@
-                @if (Model.Roles.Any(i => i.Equals("Admin")))
+
+
+                <div class="sb-sidenav-menu-heading">Kullanıcılar</div>
+
+                @*Giriş yapan kullanıcı SuperAdmin veya Role.Read Rolüne Sahip mi*@
+                @if (Model.Roles.Any(i => i.Equals("SuperAdmin") || i.Equals("Role.Read")))
                 {
-                    <div class="sb-sidenav-menu-heading">Kullanıcılar</div>
                     <a class="nav-link" asp-area="Admin" asp-controller="Role" asp-action="Index">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
                         Roller
                     </a>
+                }
 
+
+                @*Giriş yapan kullanıcı SuperAdmin veya User.Read Rolüne Sahip mi*@
+                @if (Model.Roles.Any(i => i.Equals("SuperAdmin") || i.Equals("User.Read")))
+                {
                     <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">
                         <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                         Kullanıcılar
                     </a>
                 }
+
+
             </div>
         </div>
         <div class="sb-sidenav-footer">
