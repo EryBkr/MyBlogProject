@@ -15,13 +15,13 @@ using System.Threading.Tasks;
 
 namespace MyBlog.Services.Concrete
 {
-    public class CategoryManager : ManagerBase,ICategoryService
+    public class CategoryManager : ManagerBase, ICategoryService
     {
-       
+
         //Dolu halleri Base Class ımızdan gelecektir
-        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper):base(unitOfWork,mapper)
+        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
-           
+
         }
 
         /// <summary>
@@ -51,15 +51,15 @@ namespace MyBlog.Services.Concrete
         public async Task<IDataResult<int>> CountAsync()
         {
             var categoriesCount = await UnitOfWork.Categories.CountAsync();
-            if (categoriesCount>-1)
+            if (categoriesCount > -1)
             {
-                return new DataResult<int>(ResultStatus.Success,categoriesCount);
+                return new DataResult<int>(ResultStatus.Success, categoriesCount);
             }
             else
             {
-                return new DataResult<int>(ResultStatus.Error, 0,"Beklenmeyen bir hata ile karşılaşıldı");
+                return new DataResult<int>(ResultStatus.Error, 0, "Beklenmeyen bir hata ile karşılaşıldı");
             }
-         
+
         }
 
         public async Task<IDataResult<int>> CountByIsNonDeletedAsync()
@@ -81,6 +81,7 @@ namespace MyBlog.Services.Concrete
             if (category != null)
             {
                 category.IsDeleted = true;
+                category.IsActive = false;
                 category.ModifiedByName = modifiedByName;
                 category.ModifiedDate = DateTime.Now;
                 var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
@@ -244,6 +245,56 @@ namespace MyBlog.Services.Concrete
                 Message = Messages.Category.NotFound(false)
             }
             , Messages.Category.NotFound(false));
+        }
+
+        //Silinmiş kategorileri listeleyecektir
+        public async Task<IDataResult<CategoryListDto>> GetAllByDeletedAsync()
+        {
+            var categories = await UnitOfWork.Categories.GetAllAsync(i => i.IsDeleted);
+            if (categories.Count > -1)
+            {
+                return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
+                {
+                    Categories = categories,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+            return new DataResult<CategoryListDto>(ResultStatus.Error, new CategoryListDto
+            {
+                Categories = null,
+                ResultStatus = ResultStatus.Error
+            }, Messages.Category.NotFound(true));
+        }
+
+        //Silme işlemini tersine çeviriyoruz
+        public async Task<IDataResult<CategoryDto>> UndoDeleteAsync(int categoryId, string modifiedByName)
+        {
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            if (category != null)
+            {
+                category.IsDeleted = false;
+                category.IsActive = true;
+                category.ModifiedByName = modifiedByName;
+                category.ModifiedDate = DateTime.Now;
+                var nonDeletedCategory = await UnitOfWork.Categories.UpdateAsync(category);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await UnitOfWork.SaveAsync();
+
+                return new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto
+                {
+                    Category = nonDeletedCategory,
+                    ResultStatus = ResultStatus.Success,
+                    Message = Messages.Category.NonDelete(nonDeletedCategory.Name)
+                }
+       , Messages.Category.Delete(nonDeletedCategory.Name));
+            }
+
+            return new DataResult<CategoryDto>(ResultStatus.Error, new CategoryDto
+            {
+                Category = null,
+                ResultStatus = ResultStatus.Error,
+                Message = Messages.Category.NonDeleteError()
+            }
+       , Messages.Category.NonDeleteError());
         }
     }
 }

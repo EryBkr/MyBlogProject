@@ -45,6 +45,7 @@ namespace MyBlog.Services.Concrete
                 var article = await UnitOfWork.Articles.GetAsync(i => i.Id == articleId);
                 article.ModifiedByName = modifiedByName;
                 article.IsDeleted = true;
+                article.IsActive = false;
                 article.ModifiedDate = DateTime.Now;
                 await UnitOfWork.Articles.UpdateAsync(article);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
                 await UnitOfWork.SaveAsync();
@@ -207,6 +208,42 @@ namespace MyBlog.Services.Concrete
                 return new DataResult<ArticleUpdateDto>(ResultStatus.Success, articleUpdateDto);
             }
             return new DataResult<ArticleUpdateDto>(ResultStatus.Error, null, Messages.Article.NotFound(false));
+        }
+
+        //silinmiş makaleleri geri getirdik
+        public async Task<IDataResult<ArticleListDto>> GetAllByDeletedAsync()
+        {
+            var articles = await UnitOfWork.Articles.GetAllAsync(i => i.IsDeleted, i => i.User, i => i.Category);
+            if (articles.Count > -1)
+            {
+                return new DataResult<ArticleListDto>(ResultStatus.Success, new ArticleListDto
+                {
+                    Articles = articles,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+            return new DataResult<ArticleListDto>(ResultStatus.Error, null, Messages.Article.NotFound(true));
+        }
+
+        //silinmiş makaleyi geri getirdik
+        public async Task<IResult> UndoDeleteAsync(int articleId, string modifiedByName)
+        {
+            var result = UnitOfWork.Articles.AnyAsync(i => i.Id == articleId);
+
+            if (result != null) //Bu Id ye sahip article var ise
+            {
+                var article = await UnitOfWork.Articles.GetAsync(i => i.Id == articleId);
+                article.ModifiedByName = modifiedByName;
+                article.IsDeleted = false;
+                article.IsActive = true;
+                article.ModifiedDate = DateTime.Now;
+                await UnitOfWork.Articles.UpdateAsync(article);//.ContinueWith(t=>UnitOfWork.SaveAsync());Hemen ardından save işlemi yapılması için kullandık
+                await UnitOfWork.SaveAsync();
+
+                return new Result(ResultStatus.Success, Messages.Article.NonDelete(article.Title));
+            }
+
+            return new Result(ResultStatus.Error, Messages.Article.NotFound(false));
         }
     }
 }

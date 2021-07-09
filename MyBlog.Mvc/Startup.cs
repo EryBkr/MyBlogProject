@@ -29,9 +29,13 @@ namespace MyBlog.Mvc
             //RazorRuntime kütüphanesi watch gibi çalýþýr,deðiþiklikleri anlýk olarak görebiliriz
             //AddJsonOptions kýsmýnda json iletimi ile ilgili konfigürasyonlarý tanýmlýyoruz
             //Toastr Mesajlarýný C# tarafýnda oluþturabilmemizi saðlayan yapýyý konfigüre ettik
-            services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptions 
+            services.AddControllersWithViews(opt =>
             {
-                TimeOut=5000
+                //Null Exception Hatasýný Türkçeleþtirdik
+                opt.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(val => "Bu Alan Boþ Geçilmemelidir");
+            }).AddNToastNotifyToastr(new ToastrOptions
+            {
+                TimeOut = 5000
             }).AddRazorRuntimeCompilation().AddJsonOptions(opt =>
             {
                 //Enum kullanýmý için ekledik
@@ -56,16 +60,16 @@ namespace MyBlog.Mvc
                 {
                     Name = "MyBlog",
                     HttpOnly = true,//UI Tarafýndan cookie lere eriþilememesi için tanýmlýyoruz XSS önleniyor
-                    SameSite=SameSiteMode.Strict,//CRSF Ataðýný önlemek için kullanýlýr.Cookie kendi sitemizden gelmelidir
-                    SecurePolicy=CookieSecurePolicy.SameAsRequest,//HTTP den istek gelirse HTTP olarak HTTPS den istek gelirse ona uygun olarak dönülür.Olmasý Gereken Always dir
+                    SameSite = SameSiteMode.Strict,//CRSF Ataðýný önlemek için kullanýlýr.Cookie kendi sitemizden gelmelidir
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest,//HTTP den istek gelirse HTTP olarak HTTPS den istek gelirse ona uygun olarak dönülür.Olmasý Gereken Always dir
                 };
                 opt.SlidingExpiration = true;//Süre sýfýrlamasýný saðlar
                 opt.ExpireTimeSpan = System.TimeSpan.FromDays(7);
-                opt.AccessDeniedPath= new PathString("/Admin/Auth/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
+                opt.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
             });
 
             //AutoMappper Profile Class larýmýzý burada tanýmladýk
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile), typeof(ViewModelsProfile), typeof(CommentProfile));
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile), typeof(ViewModelsProfile), typeof(CommentProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

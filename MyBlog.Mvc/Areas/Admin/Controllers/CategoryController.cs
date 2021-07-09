@@ -85,7 +85,7 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,Category.Delete")]
         public async Task<JsonResult> Delete(int categoryId)
         {
-            var result = await _categoryService.DeleteAsync(categoryId, "Eray Bakır");
+            var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
             var deletedCategory = JsonSerializer.Serialize(result.Data);
 
             return Json(deletedCategory);
@@ -136,5 +136,47 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
             return Json(categoryAjaxInvalidrModel);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Category.Read")]
+        public async Task<IActionResult> DeletedCategories()
+        {
+            //IsDeleted==true olan kategorileri alacağız
+            var result = await _categoryService.GetAllByDeletedAsync();
+            //İşlemin hatalı mı , hatalıysa mesajını data içerisinde barındırdığımız için ekstra bir kontrole gerek duymuyoruz
+            return View(result.Data);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Category.Read")]
+        public async Task<JsonResult> GetAllDeletedCategories()
+        {
+            //IsDeleted==true olan kategorileri alacağız
+            var result = await _categoryService.GetAllByDeletedAsync();
+            var categories = JsonSerializer.Serialize(result.Data, new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve });
+
+            return Json(categories);
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Category.Delete")]
+        public async Task<JsonResult> UndoDelete(int categoryId)
+        {
+            var result = await _categoryService.UndoDeleteAsync(categoryId, LoggedInUser.UserName);
+            var undoDeletedCategory = JsonSerializer.Serialize(result.Data);
+
+            return Json(undoDeletedCategory);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Category.Delete")]
+        public async Task<JsonResult> HardDelete(int categoryId)
+        {
+            //Veritabanından fiziksel olarak siliyoruz
+            var result = await _categoryService.HardDeleteAsync(categoryId);
+            var deletedCategory = JsonSerializer.Serialize(result);
+
+            return Json(deletedCategory);
+        }
     }
 }

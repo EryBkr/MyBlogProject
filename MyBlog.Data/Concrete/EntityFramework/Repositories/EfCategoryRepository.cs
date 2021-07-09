@@ -13,7 +13,7 @@ namespace MyBlog.Data.Concrete.EntityFramework.Repositories
 {
    public class EfCategoryRepository : EfEntityRepositoryBase<Category>, ICategoryRepository
     {
-        //Protected olarak tanımladığımız _context e erişip gerekli harici metotlarda db işlemleri yapabiliyoruz
+        //Protected olarak tanımladığımız DbContext e  erişip gerekli harici metotlarda db işlemleri yapabiliyoruz
         private MyBlogContext BlogContext { get { return _context as MyBlogContext; } }
 
         //UnitofWork ile alacağımız context nesnemizi base sınıfımıza gönderiyoruz

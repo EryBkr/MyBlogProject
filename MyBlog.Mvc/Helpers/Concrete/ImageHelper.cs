@@ -9,6 +9,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
 using MyBlog.Shared.Utilities.Results.Concrete;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MyBlog.Mvc.Helpers.Concrete
@@ -66,6 +67,10 @@ namespace MyBlog.Mvc.Helpers.Concrete
 
             string oldFileName = Path.GetFileNameWithoutExtension(pictureFile.FileName);
             string fileExtension = Path.GetExtension(pictureFile.FileName); //resmin uzantısını aldık
+
+            //Makale ismindeki özel karakterler bizler için problem oluşturuyordu.Bundan kaynaklı bu problemi regex ile çözeceğiz.Özel karakterler yerine artık boş string (white space değil) gelecektir.
+            Regex regex = new Regex("[*'\",._&#^@]");
+            name = regex.Replace(name,string.Empty);
 
             var dateTime = DateTime.Now; //O an ki zamanı isimlendirme için aldık
 

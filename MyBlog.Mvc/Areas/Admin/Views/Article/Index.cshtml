@@ -85,6 +85,14 @@
 
 @section Scripts{
     <script src="~/adminLTE/js/articleIndex.js" type="application/ecmascript"></script>
+    <script>
+        /*Ekle Butonu Article/Add sayfasına gönderecek*/
+        $(document).ready(function () {
+            $("#btnAdd").click(function () {
+                window.location.href = '@Url.Action("Add","Article")';
+            });
+        });
+    </script>
 }
 
 

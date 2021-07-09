@@ -21,6 +21,8 @@ namespace MyBlog.Services.Abstract
         Task<IDataResult<CategoryUpdateDto>> GetUpdateDtoAsync(int categoryId);
         Task<IDataResult<CategoryListDto>> GetAllAsync();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync();
+        //Silinmiş olanları getirecektir
+        Task<IDataResult<CategoryListDto>> GetAllByDeletedAsync();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync();
 
         //Ekleme ve güncelleme işlemlerinde gerekli datayı geri dönmemiz gerekiyor.
@@ -38,6 +40,8 @@ namespace MyBlog.Services.Abstract
 
         //IsDeleted True
         Task<IDataResult<CategoryDto>> DeleteAsync(int categoryId, string modifiedByName);
+        //Silme işlemini geri alacaktır
+        Task<IDataResult<CategoryDto>> UndoDeleteAsync(int categoryId, string modifiedByName);
         //Database Remove Yapılır
         Task<IResult> HardDeleteAsync(int categoryId);
 

@@ -19,13 +19,23 @@ namespace MyBlog.Mvc.Areas.Admin.ViewComponents
         }
 
         //Side bar ı yetkiye göre dinamik olarak oluşturacak bir ViewModel oluşturduk
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             //Giriş Yapmış Kullanıcıyı elde ettik.Senkron bir işlem olması için .Result son ekini kullandık
-            var user = _userManager.GetUserAsync(HttpContext.User).Result;
+            var user =await _userManager.GetUserAsync(HttpContext.User);
 
             //Giriş Yapmış kullanıcının Rollerini elde ettik
             var roles = _userManager.GetRolesAsync(user).Result;
+
+            if (user == null)
+            {
+                return Content("Kullanıcı Bulunamadı");
+            }
+
+            if (roles == null)
+            {
+                return Content("Roller Bulunamadı");
+            }
 
             var model = new UserWithRolesViewModels 
             {

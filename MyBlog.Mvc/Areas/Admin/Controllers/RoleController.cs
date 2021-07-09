@@ -98,6 +98,9 @@ namespace MyBlog.Mvc.Areas.Admin.Controllers
                     }
                 }
 
+                //Kullanıcya rol atadıktan sonra stamp ı güncellersek Configuration da belirlediğimiz interval süresinde kontrol başlatılır ve kullanıcının tekrar giriş yapması istenir.
+                await UserManager.UpdateSecurityStampAsync(user);
+
                 var userRoleAssignAjaxViewModel = JsonSerializer.Serialize(new UserRoleAssignAjaxViewModel 
                 {
                     UserDto=new UserDto {User=user,Message=$"{user.UserName} kullanıcısına ait rol atama işlemleri başarıyla tamamlanmıştır." },

@@ -41,15 +41,33 @@ namespace MyBlog.Services.Utilities
                 return $"{categoryName} adlı kategori başarıyla silinmiştir";
             }
 
+            /// <summary>
+            /// Kategori silme işlemi başarılı ise...
+            /// </summary>
+            /// <param name="categoryName"></param>
+            /// <returns></returns>
+            public static string NonDelete(string categoryName)
+            {
+                return $"{categoryName} adlı kategori başarıyla geri alınmıştır";
+            }
+
 
             /// <summary>
             /// Kategori silme işlemi başarısız ise...
             /// </summary>
-            /// <param name="categoryName"></param>
             /// <returns></returns>
             public static string DeleteError()
             {
                 return "Silinmek istenen kategori bulunamadı";
+            }
+
+            /// <summary>
+            /// Kategori silme işlemi başarısız ise...
+            /// </summary>
+            /// <returns></returns>
+            public static string NonDeleteError()
+            {
+                return "Geri getirilmek istenen kategori bulunamadı";
             }
 
             /// <summary>
@@ -107,6 +125,16 @@ namespace MyBlog.Services.Utilities
                 return $"{articleName} adlı makale başarıyla silinmiştir";
             }
 
+            /// <summary>
+            /// Kategori silme işlemi başarılı ise...
+            /// </summary>
+            /// <param name="articleName"></param>
+            /// <returns></returns>
+            public static string NonDelete(string articleName)
+            {
+                return $"{articleName} adlı makale başarıyla geri getirilmiştir";
+            }
+
 
             /// <summary>
             /// Kategori silme işlemi başarılı ise...
@@ -144,6 +172,10 @@ namespace MyBlog.Services.Utilities
             public static string Delete(string createdByName)
             {
                 return $"{createdByName} tarafından eklenen yorum başarıyla silinmiştir.";
+            }
+            public static string NonDelete(string createdByName)
+            {
+                return $"{createdByName} tarafından eklenen yorumun geri alınma işlemi başarıyla tamamlanmıştır.";
             }
             public static string HardDelete(string createdByName)
             {

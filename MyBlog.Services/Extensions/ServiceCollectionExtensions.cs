@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MyBlog.Data.Abstract;
 using MyBlog.Data.Concrete;
@@ -36,6 +37,13 @@ namespace MyBlog.Services.Extensions
                 opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+"; //İzin verilen karakterler
                 opt.User.RequireUniqueEmail = true; //email adresi unique mi olsun
             }).AddEntityFrameworkStores<MyBlogContext>();
+
+            //Rol Atama işleminden sonra Stamp kontrolü 30 Dk da bir yapıldığı için yapılan güncelleme kullanıcıya hemen yansımayacaktır.Bu süreyi geçici olarak kısalttık
+            serviceDescriptors.Configure<SecurityStampValidatorOptions>(opt=> 
+            {
+                opt.ValidationInterval = TimeSpan.FromMinutes(15);
+            });
+
             serviceDescriptors.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceDescriptors.AddScoped<ICategoryService, CategoryManager>();
             serviceDescriptors.AddScoped<IArticleService, ArticleManager>();

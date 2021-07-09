@@ -55,11 +55,23 @@
             <param name="categoryName"></param>
             <returns></returns>
         </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.NonDelete(System.String)">
+            <summary>
+            Kategori silme işlemi başarılı ise...
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Category.DeleteError">
             <summary>
             Kategori silme işlemi başarısız ise...
             </summary>
-            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.NonDeleteError">
+            <summary>
+            Kategori silme işlemi başarısız ise...
+            </summary>
             <returns></returns>
         </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Category.Update(System.String)">
@@ -90,6 +102,13 @@
             <returns></returns>
         </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Article.Delete(System.String)">
+            <summary>
+            Kategori silme işlemi başarılı ise...
+            </summary>
+            <param name="articleName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.NonDelete(System.String)">
             <summary>
             Kategori silme işlemi başarılı ise...
             </summary>
