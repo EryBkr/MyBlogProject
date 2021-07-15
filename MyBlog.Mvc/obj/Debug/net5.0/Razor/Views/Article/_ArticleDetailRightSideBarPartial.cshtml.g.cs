@@ -84,13 +84,20 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
 #nullable disable
 #nullable restore
 #line 12 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\_ViewImports.cshtml"
+using MyBlog.Shared.Entities.Concrete;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\_ViewImports.cshtml"
 using System.Text.RegularExpressions;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e28d41fe5c2f06135c0ca35d0945087de3481673", @"/Views/Article/_ArticleDetailRightSideBarPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b698aadbbd4b42026cc571dffde0f15fe23b1de1", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2e3cd265a9f92f23d958551ca814fce4c738b549", @"/Views/_ViewImports.cshtml")]
     public class Views_Article__ArticleDetailRightSideBarPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ArticleDetailRightSideBarViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("card-img-top text-center image-thumbnail my-1"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -123,7 +130,7 @@ using System.Text.RegularExpressions;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n<div class=\"col-md-4\">\r\n    <!-- User Widget -->\r\n    <div class=\"card my-4\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e28d41fe5c2f06135c0ca35d0945087de34816736645", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e28d41fe5c2f06135c0ca35d0945087de34816736849", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -401,7 +408,7 @@ WriteAttributeValue("", 1974, Model.User.WebsiteLink, 1974, 23, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                <li class=\"list-group-item list-group-item-primary\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e28d41fe5c2f06135c0ca35d0945087de348167318739", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e28d41fe5c2f06135c0ca35d0945087de348167318943", async() => {
 #nullable restore
 #line 62 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\Article\_ArticleDetailRightSideBarPartial.cshtml"
                                                                                                                                                       Write(Model.ArticleListDto.Articles[i].Title);
@@ -452,7 +459,7 @@ WriteAttributeValue("", 1974, Model.User.WebsiteLink, 1974, 23, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                <li class=\"list-group-item list-group-item-info\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e28d41fe5c2f06135c0ca35d0945087de348167322283", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e28d41fe5c2f06135c0ca35d0945087de348167322487", async() => {
 #nullable restore
 #line 68 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\Article\_ArticleDetailRightSideBarPartial.cshtml"
                                                                                                                                                       Write(Model.ArticleListDto.Articles[i].Title);

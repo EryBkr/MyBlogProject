@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyBlog.Entities.Concrete;
 using MyBlog.Mvc.AutoMapper.Profiles;
+using MyBlog.Mvc.Filters;
 using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Helpers.Concrete;
 using MyBlog.Services.AutoMapper.Profiles;
@@ -34,6 +35,9 @@ namespace MyBlog.Mvc
             {
                 //Null Exception Hatasýný Türkçeleþtirdik
                 opt.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(val => "Bu Alan Boþ Geçilmemelidir");
+
+                //Hata kontrol filter imizi middleware kýsmýmýza ekledik
+                opt.Filters.Add<MvcExceptionFilter>();
             }).AddNToastNotifyToastr(new ToastrOptions
             {
                 TimeOut = 5000

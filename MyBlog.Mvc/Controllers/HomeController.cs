@@ -3,6 +3,8 @@ using Microsoft.Extensions.Options;
 using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.EmailDtos;
 using MyBlog.Services.Abstract;
+using System;
+using System.Data.SqlTypes;
 using System.Threading.Tasks;
 
 namespace MyBlog.Mvc.Controllers
