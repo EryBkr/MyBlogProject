@@ -1,0 +1,20 @@
+﻿@model CommentAddDto
+
+    <div class="card my-4">
+        <h5 class="card-header">Bir Yorum Ekle:</h5>
+        <div class="card-body form-card">
+            <form asp-controller="Comment" asp-action="Add" method="post" id="form-comment-add">
+                <input type="hidden" name="IsValid" value="@ViewData.ModelState.IsValid.ToString()" />
+                <div aria-hidden="true" style="display:none;" asp-validation-summary="All" class="text-danger" id="validation-summary"></div>
+                <input type="hidden" asp-for="ArticleId" />
+                <div class="form-group">
+                    <label asp-for="CreatedByName"></label>
+                    <input class="form-control" type="text" asp-for="CreatedByName" />
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" asp-for="Text"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" id="btnSave">Gönder</button>
+            </form>
+        </div>
+    </div>

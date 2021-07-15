@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyBlog.Entities.Concrete;
 using MyBlog.Mvc.AutoMapper.Profiles;
 using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Helpers.Concrete;
@@ -45,6 +46,12 @@ namespace MyBlog.Mvc
             });
 
             services.AddSession();
+
+            //Hakkýmýzda sayfamýz için oluþturduðumuz modelimize appsettings teki verilerimizi bind edecektir.
+            services.Configure<AboutUsPageInfo>(Configuration.GetSection("AboutUsPageInfo"));
+
+            //Layout sayfamýz için oluþturduðumuz modelimize appsettings teki verilerimizi bind edecektir.
+            services.Configure<WebSiteInfo>(Configuration.GetSection("WebSiteInfo"));
 
             //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz ve connection String bilgisini verdiðimiz extension sýnýfýmýz
             services.LoadMyServices(Configuration.GetConnectionString("LocalDB"));

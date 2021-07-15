@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore/5.0.7": {
         "type": "package",
         "dependencies": {
@@ -164,6 +176,19 @@
     }
   },
   "libraries": {
+    "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+      "sha512": "PemexcITl6b0EWnZczQG3fEHFoMxUKHRoe54rHFVOlIu3b4sXzZ10pa7KBByaK5O5UGmqCdWS6K1AjXQpF+JOg==",
+      "type": "package",
+      "path": "linqkit.microsoft.entityframeworkcore/5.0.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512",
+        "linqkit.microsoft.entityframeworkcore.nuspec"
+      ]
+    },
     "Microsoft.EntityFrameworkCore/5.0.7": {
       "sha512": "VAvmiQPdw0PUh3X7k9k7haVnCfQuDgyki9rq5XVk0gXJFeh+bwqPzPrY71A08O5TjnIeK9lEggXDnMuhQXUUww==",
       "type": "package",
@@ -523,6 +548,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "LinqKit.Microsoft.EntityFrameworkCore >= 5.0.24",
       "Microsoft.EntityFrameworkCore >= 5.0.7"
     ]
   },
@@ -572,6 +598,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "LinqKit.Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[5.0.24, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.7, )"

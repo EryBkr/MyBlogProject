@@ -145,6 +145,11 @@ namespace MyBlog.Services.Utilities
             {
                 return $"{articleName} adlı makale başarıyla güncellenmiştir";
             }
+
+            public static string IncreaseViewCount(string title)
+            {
+                return $"{title} başlıklı makalenin okunma sayısı başarıyla arttırılmıştır.";
+            }
         }
 
         public static class Comment

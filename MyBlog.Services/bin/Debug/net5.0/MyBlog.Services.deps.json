@@ -30,6 +30,17 @@
           }
         }
       },
+      "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7"
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {
+            "assemblyVersion": "5.0.24.0",
+            "fileVersion": "5.0.24.0"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Core": "2.2.0",
@@ -1412,6 +1423,7 @@
       },
       "MyBlog.Shared/1.0.0": {
         "dependencies": {
+          "LinqKit.Microsoft.EntityFrameworkCore": "5.0.24",
           "Microsoft.EntityFrameworkCore": "5.0.7"
         },
         "runtime": {
@@ -1432,6 +1444,13 @@
       "sha512": "sha512-uMgbqOdu9ZG5cIOty0C85hzzayBH2i9BthnS5FlMqKtMSHDv4ts81a2jS1VFaDBVhlBeIqJ/kQKjQY95BZde9w==",
       "path": "automapper/10.1.1",
       "hashPath": "automapper.10.1.1.nupkg.sha512"
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PemexcITl6b0EWnZczQG3fEHFoMxUKHRoe54rHFVOlIu3b4sXzZ10pa7KBByaK5O5UGmqCdWS6K1AjXQpF+JOg==",
+      "path": "linqkit.microsoft.entityframeworkcore/5.0.24",
+      "hashPath": "linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication/2.2.0": {
       "type": "package",

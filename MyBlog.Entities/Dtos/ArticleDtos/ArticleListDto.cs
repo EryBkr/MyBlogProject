@@ -12,5 +12,8 @@ namespace MyBlog.Entities.Dtos.ArticleDtos
     public class ArticleListDto:DtoGetBase
     {
         public IList<Article> Articles { get; set; }
+
+        //Sayfalama içerisinde Category e göre filtre koyduysak bu değeri tutmak için oluşturduk
+        public int? CategoryId { get; set; }
     }
 }

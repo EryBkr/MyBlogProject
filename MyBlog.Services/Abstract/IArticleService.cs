@@ -1,4 +1,5 @@
-﻿using MyBlog.Entities.Concrete;
+﻿using MyBlog.Entities.ComplexTypes;
+using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.ArticleDtos;
 using MyBlog.Shared.Utilities.Results.Abtracts;
 using System;
@@ -14,6 +15,19 @@ namespace MyBlog.Services.Abstract
         Task<IDataResult<ArticleDto>> GetAsync(int articleId);
         Task<IDataResult<ArticleUpdateDto>> GetArticleUpdateDtoAsync(int articleId);
         Task<IDataResult<ArticleListDto>> GetAllAsync();
+
+        //Pagination yapısına uygun Metot
+        Task<IDataResult<ArticleListDto>> GetAllByPagingAsync(int? categoryId,int currentPage=1,int pageSize=5,bool isAscending=false);
+
+
+        Task<IDataResult<ArticleListDto>> GetAllByUserIdOnFilter(int userId,FilterBy filterBy,OrderBy orderBy,bool isAscending,int takeSize,int categoryId,DateTime startAt,DateTime endAt,int minViewCount,int maxViewCount,int minCommentsCount,int maxCommentsCount);
+
+        //Search İşlemi
+        Task<IDataResult<ArticleListDto>> SearchAsync(string keyword, int currentPage = 1, int pageSize = 5, bool isAscending = false);
+
+        //En Çok okunan Makaleler
+        Task<IDataResult<ArticleListDto>> GetAllByViewCountAsync(bool isAscending,int? takeSize);
+
         Task<IDataResult<ArticleListDto>> GetAllByNonDeletedAsync();
 
         //silinen makaleleri getirir
@@ -32,5 +46,8 @@ namespace MyBlog.Services.Abstract
         Task<IDataResult<int>> CountAsync();
 
         Task<IDataResult<int>> CountByIsNonDeletedAsync();
+
+        //Makalenin Görüntülenme sayısı
+        Task<IResult> IncreaseViewCountAsync(int articleId);
     }
 }

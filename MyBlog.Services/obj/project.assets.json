@@ -15,6 +15,18 @@
           "lib/netstandard2.0/AutoMapper.dll": {}
         }
       },
+      "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1906,6 +1918,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "LinqKit.Microsoft.EntityFrameworkCore": "5.0.24",
           "Microsoft.EntityFrameworkCore": "5.0.7"
         },
         "compile": {
@@ -1932,6 +1945,19 @@
         "lib/net461/AutoMapper.xml",
         "lib/netstandard2.0/AutoMapper.dll",
         "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+      "sha512": "PemexcITl6b0EWnZczQG3fEHFoMxUKHRoe54rHFVOlIu3b4sXzZ10pa7KBByaK5O5UGmqCdWS6K1AjXQpF+JOg==",
+      "type": "package",
+      "path": "linqkit.microsoft.entityframeworkcore/5.0.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512",
+        "linqkit.microsoft.entityframeworkcore.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication/2.2.0": {

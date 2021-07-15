@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "uc+D1UdMIxI+BOSgHSbfXx+82232l0XlDtsoJ9cO+M4VxGRZcCJi9yfDyHpRYBm/X/WUkkYh8E/wpKDBsIMU/A==",
+  "dgSpecHash": "YKokiohdQLy9wPiEeMweeE4XiUDq8dRDTtMU9XP6vRBhJ9cYp6o/pDC1LGiK59QL7OepKzfNjErtG9MdETsXKA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Blackerback\\OneDrive\\Masaüstü\\MyBlog\\MyBlog.Services\\MyBlog.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Blackerback\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\Blackerback\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\5.0.24\\linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",

@@ -8,10 +8,22 @@
     ".NETCoreApp,Version=v5.0": {
       "MyBlog.Shared/1.0.0": {
         "dependencies": {
+          "LinqKit.Microsoft.EntityFrameworkCore": "5.0.24",
           "Microsoft.EntityFrameworkCore": "5.0.7"
         },
         "runtime": {
           "MyBlog.Shared.dll": {}
+        }
+      },
+      "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.7"
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {
+            "assemblyVersion": "5.0.24.0",
+            "fileVersion": "5.0.24.0"
+          }
         }
       },
       "Microsoft.EntityFrameworkCore/5.0.7": {
@@ -145,6 +157,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PemexcITl6b0EWnZczQG3fEHFoMxUKHRoe54rHFVOlIu3b4sXzZ10pa7KBByaK5O5UGmqCdWS6K1AjXQpF+JOg==",
+      "path": "linqkit.microsoft.entityframeworkcore/5.0.24",
+      "hashPath": "linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/5.0.7": {
       "type": "package",

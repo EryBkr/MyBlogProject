@@ -19,6 +19,50 @@
             <param name="createdByName">Category i kimin eklediğini belirten parametredir</param>
             <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
         </member>
+        <member name="M:MyBlog.Services.Concrete.ArticleManager.GetAllByViewCountAsync(System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            En çok okunan makaleleri alacağız
+            </summary>
+            <param name="isAscending">Artan ya da azalan sıralamayı belirliyoruz</param>
+            <param name="takeSize">Kaç adet makalenin bize gelmesini istiyoruz</param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.ArticleManager.GetAllByPagingAsync(System.Nullable{System.Int32},System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Sayfalama yapısına uygun Listeleme
+            </summary>
+            <param name="categoryId"></param>
+            <param name="currentPage"></param>
+            <param name="pageSize"></param>
+            <param name="isAscending"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.ArticleManager.IncreaseViewCountAsync(System.Int32)">
+            <summary>
+            Makalenin Görüntülenme sayısını arttırır
+            </summary>
+            <param name="articleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.ArticleManager.GetAllByUserIdOnFilter(System.Int32,MyBlog.Entities.ComplexTypes.FilterBy,MyBlog.Entities.ComplexTypes.OrderBy,System.Boolean,System.Int32,System.Int32,System.DateTime,System.DateTime,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sidebar tarafında görüntülenecek olan makalelerin özelliklerini belirliyoruz.Filter kısmı gelecek makaleleri belirli standartlara göre filtrelerken orderby kısmı gelen makaleleri istediğimiz sırada
+            bize getiriyor
+            </summary>
+            <param name="userId"></param>
+            <param name="filterBy"></param>
+            <param name="orderBy"></param>
+            <param name="isAscending"></param>
+            <param name="takeSize"></param>
+            <param name="categoryId"></param>
+            <param name="startAt"></param>
+            <param name="endAt"></param>
+            <param name="minViewCount"></param>
+            <param name="maxViewCount"></param>
+            <param name="minCommentsCount"></param>
+            <param name="maxCommentsCount"></param>
+            <returns></returns>
+        </member>
         <member name="M:MyBlog.Services.Concrete.CategoryManager.AddAsync(MyBlog.Entities.Dtos.CategoryDtos.CategoryAddDto,System.String)">
             <summary>
             Verilen CategoryAddDto yu veritabanına Category tipinde kaydeder

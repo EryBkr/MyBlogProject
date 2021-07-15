@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "3O9GOq10KYck2+eaHH8vkvfGr2XvcplcVHTVvy0TR2/8zIv4XBzdmJNmhivCv4FuOy0FAf7f6OKJ9FgjN52PfQ==",
+  "dgSpecHash": "Bf+OXssmvWiGR6plc8n9QsjaaaXn8myRJPZHPxfOy5lswWcoZtS/VbUbqlkSiuWT39d0+Gqpopg2FwxAet5EYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Blackerback\\OneDrive\\Masaüstü\\MyBlog\\MyBlog.Mvc\\MyBlog.Mvc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Blackerback\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Blackerback\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Blackerback\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Blackerback\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\5.0.24\\linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

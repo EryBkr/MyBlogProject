@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/5.0.7": {
         "type": "package",
         "compile": {
@@ -236,6 +248,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "LinqKit.Microsoft.EntityFrameworkCore": "5.0.24",
           "Microsoft.EntityFrameworkCore": "5.0.7"
         },
         "compile": {
@@ -248,6 +261,19 @@
     }
   },
   "libraries": {
+    "LinqKit.Microsoft.EntityFrameworkCore/5.0.24": {
+      "sha512": "PemexcITl6b0EWnZczQG3fEHFoMxUKHRoe54rHFVOlIu3b4sXzZ10pa7KBByaK5O5UGmqCdWS6K1AjXQpF+JOg==",
+      "type": "package",
+      "path": "linqkit.microsoft.entityframeworkcore/5.0.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/netstandard2.1/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "linqkit.microsoft.entityframeworkcore.5.0.24.nupkg.sha512",
+        "linqkit.microsoft.entityframeworkcore.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Cryptography.Internal/5.0.7": {
       "sha512": "Dy1QDtoi+GqacAtALy70Mvl/T2p62b0tIautob4aAXYztBr1Ag/ibn+dn2uRtZgMry7nokKmjs2thC0ta6ookw==",
       "type": "package",

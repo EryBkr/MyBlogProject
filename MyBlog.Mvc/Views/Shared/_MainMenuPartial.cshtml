@@ -1,0 +1,39 @@
+﻿@*appsettings.json üzerindeki verilerimizi objeye dönüştürecek yapı*@
+@using Microsoft.Extensions.Options
+
+
+@*appsettings.json üzerinde bulunan datalarımızı objeleştirecektir*@
+@inject IOptions<WebSiteInfo> siteInfo
+
+@{
+    var webSiteInfo = siteInfo.Value;
+}
+
+@*Birden fazla layout umuz olduğu için menu kısmını ayırmak gerekti.Burada yapacağımız değişiklikler diğer Layout larımız içinde geçerli olacak ve merkezi bir yönetim sağlayacaktır*@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index" asp-area="">@webSiteInfo.Title</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="">
+                        Anasayfa
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="About" asp-area="">Hakkında</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Contact" asp-area="">İletişim</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="Admin">Yönetim Paneli</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

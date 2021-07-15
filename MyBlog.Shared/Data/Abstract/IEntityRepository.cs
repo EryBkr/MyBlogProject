@@ -18,6 +18,9 @@ namespace MyBlog.Shared.Data.Abstract
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(T entity);
 
+        //Çeşitli parametlere göre Arama işlemi yapılacaktır
+        Task<IList<T>> SearchAsync(IList<Expression<Func<T,bool>>> predicates, params Expression<Func<T, object>>[] includeProperties);
+
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
         Task<int> CountAsync(Expression<Func<T, bool>> predicate=null);
     }

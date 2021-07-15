@@ -119,9 +119,26 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CommentDto>> AddAsync(CommentAddDto commentAddDto)
         {
+            var article = await UnitOfWork.Articles.GetAsync(a=>a.Id==commentAddDto.ArticleId);
+
+            //Eklenen yoruma ait makale bulunamadıysa
+            if (article==null)
+            {
+                return new DataResult<CommentDto>(ResultStatus.Error, new CommentDto
+                {
+                    Comment = null,
+                }, Messages.Article.NotFound(false));
+            }
+
             var comment = Mapper.Map<Comment>(commentAddDto);
             var addedComment = await UnitOfWork.Comments.AddAsync(comment);
+
+           //Makaleye bir yorum eklendiyse yorum sayısını arttırmamız gerekiyor.
+            article.CommentsCount += 1;
+            await UnitOfWork.Articles.UpdateAsync(article);
+            
             await UnitOfWork.SaveAsync();
+
             return new DataResult<CommentDto>(ResultStatus.Success,new CommentDto
             {
                 Comment = addedComment,
@@ -144,14 +161,17 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CommentDto>> DeleteAsync(int commentId, string modifiedByName)
         {
-            var comment = await UnitOfWork.Comments.GetAsync(c => c.Id == commentId);
+            var comment = await UnitOfWork.Comments.GetAsync(c => c.Id == commentId,c=>c.Article);
             if (comment != null)
             {
+                var article = comment.Article;
                 comment.IsDeleted = true;
                 comment.IsActive = false;
                 comment.ModifiedByName = modifiedByName;
                 comment.ModifiedDate = DateTime.Now;
                 var deletedComment = await UnitOfWork.Comments.UpdateAsync(comment);
+                article.CommentsCount -= 1;
+                await UnitOfWork.Articles.UpdateAsync(article);
                 await UnitOfWork.SaveAsync();
                 return new DataResult<CommentDto>(ResultStatus.Success,  new CommentDto
                 {
@@ -166,10 +186,20 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IResult> HardDeleteAsync(int commentId)
         {
-            var comment = await UnitOfWork.Comments.GetAsync(c => c.Id == commentId);
+            var comment = await UnitOfWork.Comments.GetAsync(c => c.Id == commentId,c=>c.Article);
             if (comment != null)
             {
+                //Yorum daha önce geçici olarak silinmiş bir yorum mu diye kontrol ediyoruz.Diğer türlü sayıyı iki kez azaltmış olacağız
+                if (comment.IsDeleted)
+                {
+                    await UnitOfWork.Comments.DeleteAsync(comment);
+                    await UnitOfWork.SaveAsync();
+                    return new Result(ResultStatus.Success, Messages.Comment.HardDelete(comment.CreatedByName));
+                }
+                var article = comment.Article;
                 await UnitOfWork.Comments.DeleteAsync(comment);
+                article.CommentsCount = await UnitOfWork.Comments.CountAsync(c=>c.ArticleId==article.Id && !c.IsDeleted);
+                await UnitOfWork.Articles.UpdateAsync(article); //Güncellenen Yorum sayısı verildi
                 await UnitOfWork.SaveAsync();
                 return new Result(ResultStatus.Success, Messages.Comment.HardDelete(comment.CreatedByName));
             }
@@ -207,11 +237,14 @@ namespace MyBlog.Services.Concrete
             var comment = await UnitOfWork.Comments.GetAsync(i => i.Id == commentId, a => a.Article);
             if (comment != null)
             {
+                var article = comment.Article;
                 comment.IsActive = true;
                 comment.ModifiedByName = modifiedByName;
                 comment.ModifiedDate = DateTime.Now;
 
                 var updatedComment = await UnitOfWork.Comments.UpdateAsync(comment);
+                article.CommentsCount = await UnitOfWork.Comments.CountAsync(c => c.ArticleId == article.Id && !c.IsDeleted);
+                await UnitOfWork.Articles.UpdateAsync(article);
                 await UnitOfWork.SaveAsync();
 
                 return new DataResult<CommentDto>(ResultStatus.Success, new CommentDto { Comment = updatedComment }, Messages.Comment.Approve(commentId));
@@ -222,14 +255,20 @@ namespace MyBlog.Services.Concrete
 
         public async Task<IDataResult<CommentDto>> UndoDeleteAsync(int commentId, string modifiedByName)
         {
-            var comment = await UnitOfWork.Comments.GetAsync(c => c.Id == commentId);
+            var comment = await UnitOfWork.Comments.GetAsync(c => c.Id == commentId, c => c.Article);
             if (comment != null)
             {
+                var article = comment.Article;
                 comment.IsDeleted = false;
                 comment.IsActive = true;
                 comment.ModifiedByName = modifiedByName;
                 comment.ModifiedDate = DateTime.Now;
                 var undoDeletedComment = await UnitOfWork.Comments.UpdateAsync(comment);
+
+                article.CommentsCount += 1;
+
+                await UnitOfWork.Articles.UpdateAsync(article); //Güncellenen Yorum sayısı verildi
+
                 await UnitOfWork.SaveAsync();
                 return new DataResult<CommentDto>(ResultStatus.Success, new CommentDto
                 {
