@@ -3,6 +3,8 @@ using Microsoft.Extensions.Options;
 using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.EmailDtos;
 using MyBlog.Services.Abstract;
+using MyBlog.Shared.Utilities.Results.ComplexTypes;
+using NToastNotify;
 using System;
 using System.Data.SqlTypes;
 using System.Threading.Tasks;
@@ -13,11 +15,15 @@ namespace MyBlog.Mvc.Controllers
     {
         private readonly IArticleService _articleService;
         private readonly AboutUsPageInfo _aboutUsPageInfo;
+        private readonly IMailService _mailService;
+        private readonly IToastNotification _toastNotfy;
 
-        public HomeController(IArticleService articleService, IOptions<AboutUsPageInfo> aboutUsPageInfo)
+        public HomeController(IArticleService articleService, IOptions<AboutUsPageInfo> aboutUsPageInfo, IMailService mailService, IToastNotification toastNotfy)
         {
             _articleService = articleService;
             _aboutUsPageInfo = aboutUsPageInfo.Value; //Startup a eklediğimiz Configuration sayesinde IOptions aracılığıyla modelimizi appsettings ten dolduruyoruz
+            _mailService = mailService;
+            _toastNotfy = toastNotfy;
         }
 
         [HttpGet]
@@ -54,8 +60,18 @@ namespace MyBlog.Mvc.Controllers
         [HttpPost]
         public IActionResult Contact(EmailSendDto model)
         {
+            if (ModelState.IsValid)
+            {
+                var result=_mailService.SendContactEmail(model);
 
-            return View();
+                if (result.ResultStatus==ResultStatus.Success)
+                {
+                    _toastNotfy.AddSuccessToastMessage(result.Message, new ToastrOptions { Title = "Başarılı İşlem" });
+                }
+                return View();
+            }
+            
+            return View(model);
         }
     }
 }

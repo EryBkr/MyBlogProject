@@ -43,6 +43,9 @@
     <script src="~/blogLTE/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @await RenderSectionAsync("Scripts", false)
+
+    @*Action içerisinde oluşturulan NToastr mesajlarını gösteriyoruz*@
+    @await Component.InvokeAsync("NToastNotify")
 </body>
 
 </html>

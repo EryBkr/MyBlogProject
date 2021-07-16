@@ -78,6 +78,20 @@
             <param name="categoryId">0 dan büyük integer bir ID değeri</param>
             <returns>Asenkron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geri döner</returns>
         </member>
+        <member name="M:MyBlog.Services.Concrete.MailManager.Send(MyBlog.Entities.Dtos.EmailDtos.EmailSendDto)">
+            <summary>
+            Client tarafına ulaşması gereken maillerden sorumlu metot (şifremi unuttum,abonelik bilgileri vs...)
+            </summary>
+            <param name="emailSendDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.MailManager.SendContactEmail(MyBlog.Entities.Dtos.EmailDtos.EmailSendDto)">
+            <summary>
+            İletişim kısmından dolduran maillerin bize gelmesini sağlar 
+            </summary>
+            <param name="emailSendDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Category.NotFound(System.Boolean)">
             <summary>
             Kategorinin çoğul mu tekil mi olduğuna göre dönen mesaj değişecektir

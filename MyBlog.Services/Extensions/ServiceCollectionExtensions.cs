@@ -48,6 +48,7 @@ namespace MyBlog.Services.Extensions
             serviceDescriptors.AddScoped<ICategoryService, CategoryManager>();
             serviceDescriptors.AddScoped<IArticleService, ArticleManager>();
             serviceDescriptors.AddScoped<ICommentService, CommentManager>();
+            serviceDescriptors.AddSingleton<IMailService, MailManager>();
 
             return serviceDescriptors;
         }

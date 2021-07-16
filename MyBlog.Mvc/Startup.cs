@@ -57,6 +57,9 @@ namespace MyBlog.Mvc
             //Layout sayfamýz için oluþturduðumuz modelimize appsettings teki verilerimizi bind edecektir.
             services.Configure<WebSiteInfo>(Configuration.GetSection("WebSiteInfo"));
 
+            //Mail göndermek için oluþturduðumuz smtp konfigürasyonlarýmýz modelimize appsettings teki verilerimizi bind edecektir.
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+
             //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz ve connection String bilgisini verdiðimiz extension sýnýfýmýz
             services.LoadMyServices(Configuration.GetConnectionString("LocalDB"));
             //Resim iþlemleri için oluþturduðumuz class ý implemente ettik
