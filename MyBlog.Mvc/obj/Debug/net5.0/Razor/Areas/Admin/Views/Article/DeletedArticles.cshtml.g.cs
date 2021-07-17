@@ -21,48 +21,69 @@ using MyBlog.Mvc.Areas.Admin.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.CategoryDtos;
+using MyBlog.Mvc.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.UserDtos;
+using MyBlog.Entities.Dtos.CategoryDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.ArticleDtos;
+using MyBlog.Entities.Dtos.UserDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.CommentDtos;
+using MyBlog.Entities.Dtos.ArticleDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.RoleDtos;
+using MyBlog.Entities.Dtos.CommentDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Dtos.RoleDtos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Concrete;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.ComplexTypes;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"aac70bd55875104df14120b6c480e53760fdfc66", @"/Areas/Admin/Views/Article/DeletedArticles.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fd73a50317bc9f1904693e1e4ff0d4910cebaa16", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0104d68e65e0a6c2f70d7d86fa018f09668fab6b", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Article_DeletedArticles : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ArticleListDto>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "Admin", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -108,7 +129,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
 #line hidden
 #nullable disable
             WriteLiteral("<ol class=\"breadcrumb mb-3 mt-2\">\r\n    <li class=\"breadcrumb-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aac70bd55875104df14120b6c480e53760fdfc667446", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aac70bd55875104df14120b6c480e53760fdfc668069", async() => {
                 WriteLiteral("Admin");
             }
             );
@@ -128,7 +149,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n    <li class=\"breadcrumb-item active\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aac70bd55875104df14120b6c480e53760fdfc669052", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aac70bd55875104df14120b6c480e53760fdfc669675", async() => {
                 WriteLiteral("Silinmiş Makaleler");
             }
             );
@@ -239,7 +260,7 @@ WriteAttributeValue("", 2246, article.Id, 2246, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("</td>\r\n                        <td>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "aac70bd55875104df14120b6c480e53760fdfc6614081", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "aac70bd55875104df14120b6c480e53760fdfc6614704", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -361,7 +382,7 @@ AddHtmlAttributeValue("", 2457, article.Thumbnail, 2457, 18, false);
             WriteLiteral("                    \r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
             DefineSection("Scripts", async() => {
                 WriteLiteral("\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aac70bd55875104df14120b6c480e53760fdfc6619993", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aac70bd55875104df14120b6c480e53760fdfc6620616", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

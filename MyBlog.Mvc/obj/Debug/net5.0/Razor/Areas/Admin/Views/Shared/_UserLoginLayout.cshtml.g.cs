@@ -21,48 +21,69 @@ using MyBlog.Mvc.Areas.Admin.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.CategoryDtos;
+using MyBlog.Mvc.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.UserDtos;
+using MyBlog.Entities.Dtos.CategoryDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.ArticleDtos;
+using MyBlog.Entities.Dtos.UserDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.CommentDtos;
+using MyBlog.Entities.Dtos.ArticleDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.RoleDtos;
+using MyBlog.Entities.Dtos.CommentDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Dtos.RoleDtos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Concrete;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.ComplexTypes;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f7dc9b31cd797baabac4d4fc03c74d298abec2e9", @"/Areas/Admin/Views/Shared/_UserLoginLayout.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fd73a50317bc9f1904693e1e4ff0d4910cebaa16", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0104d68e65e0a6c2f70d7d86fa018f09668fab6b", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Shared__UserLoginLayout : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/adminLTE/css/styles.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -97,7 +118,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<!DOCTYPE html>\r\n<html lang=\"tr\">\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7dc9b31cd797baabac4d4fc03c74d298abec2e96486", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7dc9b31cd797baabac4d4fc03c74d298abec2e97109", async() => {
                 WriteLiteral("\r\n    <meta charset=\"utf-8\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\" />\r\n    <meta name=\"description\"");
                 BeginWriteAttribute("content", " content=\"", 256, "\"", 266, 0);
                 EndWriteAttribute();
@@ -113,7 +134,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
 #line hidden
 #nullable disable
                 WriteLiteral(" | My Blog</title>\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f7dc9b31cd797baabac4d4fc03c74d298abec2e97613", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f7dc9b31cd797baabac4d4fc03c74d298abec2e98236", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -128,7 +149,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f7dc9b31cd797baabac4d4fc03c74d298abec2e98791", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f7dc9b31cd797baabac4d4fc03c74d298abec2e99414", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -155,7 +176,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7dc9b31cd797baabac4d4fc03c74d298abec2e910805", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7dc9b31cd797baabac4d4fc03c74d298abec2e911428", async() => {
                 WriteLiteral("\r\n    <div id=\"layoutAuthentication\">\r\n        <div id=\"layoutAuthentication_content\">\r\n            <main>\r\n               ");
 #nullable restore
 #line 18 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\Shared\_UserLoginLayout.cshtml"
@@ -193,7 +214,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
     <script src=""https://code.jquery.com/jquery-3.5.1.min.js"" crossorigin=""anonymous""></script>
     <script src=""https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"" crossorigin=""anonymous""></script>
     ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7dc9b31cd797baabac4d4fc03c74d298abec2e912749", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7dc9b31cd797baabac4d4fc03c74d298abec2e913372", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

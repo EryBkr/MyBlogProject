@@ -21,48 +21,69 @@ using MyBlog.Mvc.Areas.Admin.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.CategoryDtos;
+using MyBlog.Mvc.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.UserDtos;
+using MyBlog.Entities.Dtos.CategoryDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.ArticleDtos;
+using MyBlog.Entities.Dtos.UserDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.CommentDtos;
+using MyBlog.Entities.Dtos.ArticleDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
-using MyBlog.Entities.Dtos.RoleDtos;
+using MyBlog.Entities.Dtos.CommentDtos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Dtos.RoleDtos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.Concrete;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
+using MyBlog.Entities.ComplexTypes;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\_ViewImports.cshtml"
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fee7c21ea25739f740dad0da83f0e6cfa663cebf", @"/Areas/Admin/Views/Role/_RoleAssignPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fd73a50317bc9f1904693e1e4ff0d4910cebaa16", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0104d68e65e0a6c2f70d7d86fa018f09668fab6b", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Role__RoleAssignPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<UserRoleAssignDto>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-danger"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -122,7 +143,7 @@ using MyBlog.Shared.Utilities.Results.ComplexTypes;
             </div>
             <div class=""modal-body"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fee7c21ea25739f740dad0da83f0e6cfa663cebf8850", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fee7c21ea25739f740dad0da83f0e6cfa663cebf9473", async() => {
                 WriteLiteral("\r\n                    <input name=\"IsValid\" type=\"hidden\"");
                 BeginWriteAttribute("value", " value=\"", 713, "\"", 760, 1);
 #nullable restore
@@ -134,7 +155,7 @@ WriteAttributeValue("", 721, ViewData.ModelState.IsValid.ToString(), 721, 39, fa
 #nullable disable
                 EndWriteAttribute();
                 WriteLiteral(" />\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fee7c21ea25739f740dad0da83f0e6cfa663cebf9620", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fee7c21ea25739f740dad0da83f0e6cfa663cebf10243", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -159,7 +180,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf11588", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf12212", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -258,7 +279,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
 #line hidden
 #nullable disable
                 WriteLiteral("                            <div class=\"form-group col-md-3\">\r\n                                <div class=\"form-check\">\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf17418", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf18042", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -282,7 +303,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("label", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fee7c21ea25739f740dad0da83f0e6cfa663cebf19286", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("label", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fee7c21ea25739f740dad0da83f0e6cfa663cebf19910", async() => {
 #nullable restore
 #line 67 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Areas\Admin\Views\Role\_RoleAssignPartial.cshtml"
                                                                                 Write(Model.RoleAssignDtos[i].RoleName);
@@ -310,7 +331,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_LabelTagHelper.For = ModelExpressionProvid
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf21165", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf21789", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -333,7 +354,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf22945", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fee7c21ea25739f740dad0da83f0e6cfa663cebf23569", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.ArticleDtos;
 using MyBlog.Mvc.Areas.Admin.Models;
+using MyBlog.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace MyBlog.Mvc.AutoMapper.Profiles
 
             //Tam Tersi dönüşüm de geçerli olsun diye ReverseMap metodunu kullandık
             CreateMap<ArticleUpdateViewModel, ArticleUpdateDto>().ReverseMap();
+            CreateMap<ArticleRightSideBarWidgetOptions, ArticleRightSideBarWidgetOptionsViewModel>().ReverseMap();
         }
     }
 }

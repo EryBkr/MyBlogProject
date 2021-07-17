@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.EmailDtos;
 using MyBlog.Services.Abstract;
+using MyBlog.Shared.Utilities.Helpers.Abstract;
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 using NToastNotify;
 using System;
@@ -18,12 +19,17 @@ namespace MyBlog.Mvc.Controllers
         private readonly IMailService _mailService;
         private readonly IToastNotification _toastNotfy;
 
-        public HomeController(IArticleService articleService, IOptions<AboutUsPageInfo> aboutUsPageInfo, IMailService mailService, IToastNotification toastNotfy)
+        //Appsettings dosyamız üzerinde gerekli section üzerinde değişiklik yapabilmek için ekledik
+        private readonly IWritableOptions<AboutUsPageInfo> _aboutUsPageWritable;
+
+        //IOptionsSnapshot kullanımı,eğer projemiz ayaktayken json file üzerinde yapılan değişikliklerin projemize yansımasını sağlar
+        public HomeController(IArticleService articleService, IOptionsSnapshot<AboutUsPageInfo> aboutUsPageInfo, IMailService mailService, IToastNotification toastNotfy, IWritableOptions<AboutUsPageInfo> aboutUsPageWritable)
         {
             _articleService = articleService;
             _aboutUsPageInfo = aboutUsPageInfo.Value; //Startup a eklediğimiz Configuration sayesinde IOptions aracılığıyla modelimizi appsettings ten dolduruyoruz
             _mailService = mailService;
             _toastNotfy = toastNotfy;
+            _aboutUsPageWritable = aboutUsPageWritable;
         }
 
         [HttpGet]

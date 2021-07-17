@@ -18,11 +18,24 @@ namespace MyBlog.Mvc
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                //appsettins deðiþikliklerinin proje tekrar ayaða kalkmadan deðiþmesi için ekledik 
+                config.Sources.Clear();
+                var env = hostingContext.HostingEnvironment;
+                config
+                .AddJsonFile(path: "appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+                config.AddEnvironmentVariables();
+
+                if (args != null)
+                    config.AddCommandLine(args);
+
+            })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).ConfigureLogging(logging=> 
+                }).ConfigureLogging(logging =>
                 {
                     //Diðer log uygulamalarýný iptal ettik
                     logging.ClearProviders();

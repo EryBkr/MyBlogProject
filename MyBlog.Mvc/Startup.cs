@@ -11,6 +11,7 @@ using MyBlog.Mvc.Helpers.Abstract;
 using MyBlog.Mvc.Helpers.Concrete;
 using MyBlog.Services.AutoMapper.Profiles;
 using MyBlog.Services.Extensions;
+using MyBlog.Shared.Utilities.Extensions;
 using NToastNotify;
 using System.Text.Json.Serialization;
 
@@ -60,6 +61,9 @@ namespace MyBlog.Mvc
             //Mail göndermek için oluþturduðumuz smtp konfigürasyonlarýmýz modelimize appsettings teki verilerimizi bind edecektir.
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
 
+            //Okunan makale ile alakalý sayfada gösterilecek makalelerin hangi þartlarla ve sýrayla geleceðinizi belirleyen appsettings.json da ki verileri modelimize bind edecektir
+            services.Configure<ArticleRightSideBarWidgetOptions>(Configuration.GetSection("ArticleRightSideBarWidgetOptions"));
+
             //Ýþ Katmanýnda ki baðýmlýlýklarý çözdüðümüz ve connection String bilgisini verdiðimiz extension sýnýfýmýz
             services.LoadMyServices(Configuration.GetConnectionString("LocalDB"));
             //Resim iþlemleri için oluþturduðumuz class ý implemente ettik
@@ -81,6 +85,15 @@ namespace MyBlog.Mvc
                 opt.ExpireTimeSpan = System.TimeSpan.FromDays(7);
                 opt.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied"); //Yetkisi olmayan bir yere girmeye çalýþan üyenin yönlendireleceði yer
             });
+
+            //appsettings üzerinde ki section ý deðiþtirebilmek için ekledik
+            services.ConfigureWritable<AboutUsPageInfo>(Configuration.GetSection("AboutUsPageInfo"));
+            //appsettings üzerinde ki section ý deðiþtirebilmek için ekledik
+            services.ConfigureWritable<WebSiteInfo>(Configuration.GetSection("WebSiteInfo"));  
+            //appsettings üzerinde ki section ý deðiþtirebilmek için ekledik
+            services.ConfigureWritable<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+            //Okunan makale ile alakalý sayfada gösterilecek makalelerin hangi þartlarla ve sýrayla geleceðinizi belirleyen appsettings.json da ki verileri deðiþtirmemizi saðlayacaktýr
+            services.ConfigureWritable<ArticleRightSideBarWidgetOptions>(Configuration.GetSection("ArticleRightSideBarWidgetOptions"));
 
             //AutoMappper Profile Class larýmýzý burada tanýmladýk
             services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile), typeof(ViewModelsProfile), typeof(CommentProfile));

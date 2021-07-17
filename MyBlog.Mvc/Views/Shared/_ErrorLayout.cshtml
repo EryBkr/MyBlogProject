@@ -4,7 +4,7 @@
 
 
 @*appsettings.json üzerinde bulunan datalarımızı objeleştirecektir*@
-@inject IOptions<WebSiteInfo> siteInfo
+@inject IOptionsSnapshot<WebSiteInfo> siteInfo
 
 @{
     var webSiteInfo = siteInfo.Value;

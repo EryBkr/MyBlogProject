@@ -15,11 +15,15 @@ namespace MyBlog.Mvc.Controllers
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleService;
-       
 
-        public ArticleController(IArticleService articleService)
+        //Detay sayfamızda ki makaleyle alakalı önerilen makalelerin hangi şart ve sırayla geleceğini belirleyen parametreleri appsettings ten almamızı sağlayan yapıdır
+        private readonly ArticleRightSideBarWidgetOptions _articleOptions;
+
+
+        public ArticleController(IArticleService articleService, IOptionsSnapshot<ArticleRightSideBarWidgetOptions> articleOptions)
         {
             _articleService = articleService;
+            _articleOptions = articleOptions.Value;
         }
 
         [HttpGet]
@@ -29,8 +33,8 @@ namespace MyBlog.Mvc.Controllers
 
             if (articleResult.ResultStatus == ResultStatus.Success)
             {
-                //Okunan makaleyle alakalı kullanıcıya ait diğer makaleleri aldık
-                var userArticles = await _articleService.GetAllByUserIdOnFilter(articleResult.Data.Article.UserId, FilterBy.Category, OrderBy.Date, isAscending: false, 10, articleResult.Data.Article.CategoryId, DateTime.Now, DateTime.Now, 0, 99999, 0, 99999);
+                //Okunan makaleyle alakalı kullanıcıya ait diğer makaleleri aldık.Alma işleminde appsettings json dosyamızda ki parametrelerden faydalandık
+                var userArticles = await _articleService.GetAllByUserIdOnFilter(articleResult.Data.Article.UserId, _articleOptions.FilterBy, _articleOptions.OrderBy, _articleOptions.IsAscending, _articleOptions.TakeSize, _articleOptions.CategoryId, _articleOptions.StartAt, _articleOptions.EndAt, _articleOptions.MinViewCount, _articleOptions.MaxViewCount,_articleOptions.MinCommentCount, _articleOptions.MaxCommentCount);
 
                 //Okunma sayısını arttırıyoruz
                 await _articleService.IncreaseViewCountAsync(articleId);
@@ -39,7 +43,7 @@ namespace MyBlog.Mvc.Controllers
                 var articleDetailRightSideBarViewModel = new ArticleDetailRightSideBarViewModel 
                 {
                     ArticleListDto=userArticles.Data,
-                    Header="Kullanıcının Aynı Kategori Üzerindeki En Çok Okunan Makaleleri",
+                    Header=_articleOptions.Header,
                     User=articleResult.Data.Article.User
                 };
 

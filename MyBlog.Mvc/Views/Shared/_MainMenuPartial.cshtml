@@ -3,7 +3,7 @@
 
 
 @*appsettings.json üzerinde bulunan datalarımızı objeleştirecektir*@
-@inject IOptions<WebSiteInfo> siteInfo
+@inject IOptionsSnapshot<WebSiteInfo> siteInfo
 
 @{
     var webSiteInfo = siteInfo.Value;
@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="About" asp-area="">Hakkında</a>
+                    <a class="nav-link" asp-controller="Home" asp-action="About" asp-area="">Hakkımızda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Contact" asp-area="">İletişim</a>
