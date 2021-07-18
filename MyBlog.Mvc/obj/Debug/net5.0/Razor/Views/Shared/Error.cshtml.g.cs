@@ -96,8 +96,15 @@ using System.Text.RegularExpressions;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 14 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\_ViewImports.cshtml"
+using MyBlog.Mvc.Utilities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5da4b8086fe2a573c4dce9d3f0d8eabef214e38", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2e3cd265a9f92f23d958551ca814fce4c738b549", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"22703fa9a3179bbd28bc177470a4e58e6e596d51", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-warning"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -180,7 +187,7 @@ using System.Text.RegularExpressions;
 #line hidden
 #nullable disable
             WriteLiteral("        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5da4b8086fe2a573c4dce9d3f0d8eabef214e387924", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5da4b8086fe2a573c4dce9d3f0d8eabef214e388117", async() => {
                 WriteLiteral("\r\n            <i class=\"fas fa-arrow-left mr-1\"></i>\r\n            Anasayfa\'\'ya dönmek için tıklayınız.\r\n        ");
             }
             );

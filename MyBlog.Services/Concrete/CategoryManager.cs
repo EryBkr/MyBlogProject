@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MyBlog.Data.Abstract;
 using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.CategoryDtos;
@@ -105,8 +106,16 @@ namespace MyBlog.Services.Concrete
        , Messages.Category.DeleteError());
         }
 
+        /// <summary>
+        /// AsQueryable Kullanımına örnek olarak ekledim
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         public async Task<IDataResult<CategoryDto>> GetAsync(int categoryId)
         {
+            
+            //var query = UnitOfWork.Categories.GetAsQueryable();
+            //query.Include(i => i.Articles).ThenInclude(a => a.Comments);
 
             var category = await UnitOfWork.Categories.GetAsync(i => i.Id == categoryId, i => i.Articles);
             if (category != null)

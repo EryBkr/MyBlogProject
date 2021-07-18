@@ -96,8 +96,15 @@ using System.Text.RegularExpressions;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 14 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\_ViewImports.cshtml"
+using MyBlog.Mvc.Utilities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"372813331cd66f80ff2d4b9a82207909a110d10a", @"/Views/Shared/Components/RightSideBar/Default.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2e3cd265a9f92f23d958551ca814fce4c738b549", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"22703fa9a3179bbd28bc177470a4e58e6e596d51", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Components_RightSideBar_Default : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<RightSideBarViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Article", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -134,7 +141,7 @@ using System.Text.RegularExpressions;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n<div class=\"col-md-4\">\r\n\r\n    <!-- Search Widget -->\r\n    <div class=\"card my-4\">\r\n        <h5 class=\"card-header\">Arama</h5>\r\n        <div class=\"card-body\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a7853", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a8046", async() => {
                 WriteLiteral(@"
                 <div class=""input-group"">
                     <input type=""text"" class=""form-control"" name=""keyword"" placeholder=""Anahtar Kelime..."">
@@ -178,7 +185,7 @@ using System.Text.RegularExpressions;
                     <ul class=""list-group"">
                         <li class=""list-group-item"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a10658", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a10851", async() => {
                 WriteLiteral("Hepsi");
             }
             );
@@ -207,7 +214,7 @@ using System.Text.RegularExpressions;
 #line hidden
 #nullable disable
             WriteLiteral("                            <li class=\"list-group-item\">\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a12663", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a12856", async() => {
 #nullable restore
 #line 34 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\Shared\Components\RightSideBar\Default.cshtml"
                                                                                                                        Write(category.Name);
@@ -281,7 +288,7 @@ using System.Text.RegularExpressions;
 #line hidden
 #nullable disable
             WriteLiteral("                                <li class=\"list-group-item list-group-item-primary\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a16928", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a17121", async() => {
 #nullable restore
 #line 56 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\Shared\Components\RightSideBar\Default.cshtml"
                                                                                                                                        Write(Model.Articles[i].Title);
@@ -332,7 +339,7 @@ using System.Text.RegularExpressions;
 #line hidden
 #nullable disable
             WriteLiteral("                                <li class=\"list-group-item list-group-item-info\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a20418", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "372813331cd66f80ff2d4b9a82207909a110d10a20611", async() => {
 #nullable restore
 #line 62 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\Shared\Components\RightSideBar\Default.cshtml"
                                                                                                                                        Write(Model.Articles[i].Title);

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -89,13 +90,14 @@ namespace MyBlog.Mvc
             //appsettings üzerinde ki section ý deðiþtirebilmek için ekledik
             services.ConfigureWritable<AboutUsPageInfo>(Configuration.GetSection("AboutUsPageInfo"));
             //appsettings üzerinde ki section ý deðiþtirebilmek için ekledik
-            services.ConfigureWritable<WebSiteInfo>(Configuration.GetSection("WebSiteInfo"));  
+            services.ConfigureWritable<WebSiteInfo>(Configuration.GetSection("WebSiteInfo"));
             //appsettings üzerinde ki section ý deðiþtirebilmek için ekledik
             services.ConfigureWritable<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
             //Okunan makale ile alakalý sayfada gösterilecek makalelerin hangi þartlarla ve sýrayla geleceðinizi belirleyen appsettings.json da ki verileri deðiþtirmemizi saðlayacaktýr
             services.ConfigureWritable<ArticleRightSideBarWidgetOptions>(Configuration.GetSection("ArticleRightSideBarWidgetOptions"));
 
-            //AutoMappper Profile Class larýmýzý burada tanýmladýk
+
+            //AutoMappper Profile Class larýmýzý burada tanýmladýk.
             services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile), typeof(ViewModelsProfile), typeof(CommentProfile));
         }
 
@@ -121,7 +123,7 @@ namespace MyBlog.Mvc
 
             app.UseRouting();
 
-            app.UseAuthentication(); //Kimlik kontrolü
+            app.UseAuthentication(); //Kimlik kontrolü 
             app.UseAuthorization(); //Yetkilendirme
 
 
@@ -134,6 +136,11 @@ namespace MyBlog.Mvc
                     name: "Admin",
                     areaName: "Admin",
                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+                    );
+                endpoints.MapControllerRoute( //SEO uyumlu makale URL i için ekledik
+                    name: "article",
+                    pattern: "Makaleler/{title}/{articleId}",
+                    defaults: new { controller = "Article", action = "Detail" }
                     );
                 endpoints.MapDefaultControllerRoute();
             });

@@ -8,6 +8,29 @@ namespace MyBlog.Services.Utilities
 {
     public static class Messages
     {
+       
+        public static class General
+        {
+            public static string ValidationError()
+            {
+                return "Bir veya daha fazla validasyon hatası ile karşılaşıldı";
+            }
+        }
+
+
+        public static class Users
+        {
+            /// <summary>
+            /// Verilen Id e ait kullanıcı var mı
+            /// </summary>
+            /// <param name="userId"></param>
+            /// <returns></returns>
+            public static string NotFoundById(int userId)
+            {
+                return $"{userId} user koduna ait bir user bulunamadı";
+            }
+        }
+
         public static class Category
         {
             /// <summary>
@@ -18,6 +41,17 @@ namespace MyBlog.Services.Utilities
             public static string NotFound(bool isPlural)
             {
                 return isPlural ? "Hiç bir kategori bulunamadı" : "Böyle bir kategori bulunamadı";
+            }
+
+
+            /// <summary>
+            /// Verilen Id e ait kategori var mı
+            /// </summary>
+            /// <param name="categoryId"></param>
+            /// <returns></returns>
+            public static string NotFoundById(int categoryId)
+            {
+                return $"{categoryId} kategori koduna ait bir kategori bulunamadı";
             }
 
 
@@ -93,6 +127,16 @@ namespace MyBlog.Services.Utilities
             public static string NotFound(bool isPlural)
             {
                 return isPlural ? "Hiç bir makale bulunamadı" : "Böyle bir makale bulunamadı";
+            }
+
+            /// <summary>
+            ///  Verilen Id e ait makale var mı
+            /// </summary>
+            /// <param name="articleId"></param>
+            /// <returns></returns>
+            public static string NotFoundById(int articleId)
+            {
+                return  $"{articleId} makale koduna ait bir makale bulunamadı";
             }
 
             /// <summary>

@@ -47,7 +47,9 @@
                     }
                     @(article.Content.Length>250 ? article.Content.Substring(0,250):article.Content)
                 </p>
-                <a asp-controller="Article" asp-action="Detail" asp-area="" asp-route-articleId="@article.Id" class="btn btn-primary">Daha fazla Oku &rarr;</a>
+
+                @*URL imizi yazmış olduğumuz extension ile seo uyumlu hale getiriyoruz.Aynı zamanda startup ta tanımladığımız şablona uyumlu olmasına dikkat ediyoruz*@
+                <a href="/Makaleler/@Url.FriendlyUrlHelper(article.Title)/@article.Id"  class="btn btn-primary">Daha fazla Oku &rarr;</a>
             </div>
             <div class="card-footer text-muted">
                 @article.User.UserName tarafından @article.Date tarihinde paylaşılmıştır.

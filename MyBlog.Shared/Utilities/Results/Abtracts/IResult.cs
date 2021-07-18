@@ -1,4 +1,5 @@
-﻿using MyBlog.Shared.Utilities.Results.ComplexTypes;
+﻿using MyBlog.Shared.Entities.Concrete;
+using MyBlog.Shared.Utilities.Results.ComplexTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace MyBlog.Shared.Utilities.Results.Abtracts
         public ResultStatus ResultStatus { get; }
         public string Message { get; }
         public Exception Exception { get; }
+
+        //iş katmanında aldığımız validasyon hatalarını UI tarafına gönderebilmek için ekledik
+        public IEnumerable<ValidationError> ValidationErrors { get; }
     }
 }

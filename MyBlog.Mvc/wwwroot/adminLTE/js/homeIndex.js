@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    //Datatable
     $("#articlesTable").DataTable({
         language: {
             "emptyTable": "Tabloda herhangi bir veri mevcut değil",
@@ -189,8 +190,54 @@
                 }
             }
         },
-       /* Hangi kolona göre sıralama olacak onu belirledik*/
+        /* Hangi kolona göre sıralama olacak onu belirledik*/
         "order": [[4, "asc"]]
 
     });
+    //Datatable
+
+    //Chart.js
+    $.get("/Admin/Article/GetAllByViewCount/?isAscending=false&takeSize=10", function (data) {
+        const articleResult = jQuery.parseJSON(data);
+
+        let viewCountContext = $("#viewCountChart");
+        let viewCountChart = new Chart(viewCountContext,
+            {
+                type: 'bar',
+                data:
+                {
+                    labels: articleResult.$values.map(article => article.Title),
+                    datasets:
+                        [
+                            {
+                                label: "Okunma Sayısı",
+                                backgroundColor: "rgba(2,117,216,1)",
+                                data: articleResult.$values.map(article => article.ViewsCount),
+                                hoverBorderWidth: 4,
+                                hoverBorderColor: "black"
+                            },
+                            {
+                                label: "Yorum Sayısı",
+                                backgroundColor: "red",
+                                data: articleResult.$values.map(article => article.CommentsCount),
+                                hoverBorderWidth: 4,
+                                hoverBorderColor: "black"
+                            }
+                        ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 18
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+    });
+
 });

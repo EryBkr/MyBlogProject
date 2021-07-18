@@ -11,7 +11,13 @@ namespace MyBlog.Shared.Data.Abstract
     public interface IEntityRepository<T> where T:class,IEntity,new()
     {
         Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+        //Daha Geniş Bir Filtre Kontrolü yapıtğımız override metot oluşturmuş olduk
+        Task<T> GetAsyncV2(IList<Expression<Func<T, bool>>> predicates,IList<Expression<Func<T, object>>> includeProperties);
+
         Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties);
+        //Daha Geniş Bir Filtre Kontrolü yapıtğımız override metot oluşturmuş olduk
+        Task<IList<T>> GetAllAsyncV2(IList<Expression<Func<T, bool>>> predicates, IList<Expression<Func<T, object>>> includeProperties);
+
 
         //Ekleme güncelleme işlemlerinde data ya erişebilmek için manipüle edilen datayı işlem sonucunda geri dönderiyoruz
         Task<T> AddAsync(T entity);
@@ -23,5 +29,8 @@ namespace MyBlog.Shared.Data.Abstract
 
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
         Task<int> CountAsync(Expression<Func<T, bool>> predicate=null);
+
+        //Karmaşık sorgular için oluşturduk
+        IQueryable<T> GetAsQueryable();
     }
 }

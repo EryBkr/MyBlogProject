@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using MyBlog.Entities.ComplexTypes;
 using MyBlog.Entities.Concrete;
+using MyBlog.Mvc.Attributes;
 using MyBlog.Mvc.Models;
 using MyBlog.Services.Abstract;
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
@@ -27,6 +28,7 @@ namespace MyBlog.Mvc.Controllers
         }
 
         [HttpGet]
+        [ViewCountFilterAttribute] //Cookie kontrollü olarak makale okunma sayısı arttırılıyor
         public async Task<IActionResult> Detail(int articleId)
         {
             var articleResult =await _articleService.GetAsync(articleId);
@@ -36,8 +38,6 @@ namespace MyBlog.Mvc.Controllers
                 //Okunan makaleyle alakalı kullanıcıya ait diğer makaleleri aldık.Alma işleminde appsettings json dosyamızda ki parametrelerden faydalandık
                 var userArticles = await _articleService.GetAllByUserIdOnFilter(articleResult.Data.Article.UserId, _articleOptions.FilterBy, _articleOptions.OrderBy, _articleOptions.IsAscending, _articleOptions.TakeSize, _articleOptions.CategoryId, _articleOptions.StartAt, _articleOptions.EndAt, _articleOptions.MinViewCount, _articleOptions.MaxViewCount,_articleOptions.MinCommentCount, _articleOptions.MaxCommentCount);
 
-                //Okunma sayısını arttırıyoruz
-                await _articleService.IncreaseViewCountAsync(articleId);
 
                 //Side Bar için olan modelimizi oluşturduk
                 var articleDetailRightSideBarViewModel = new ArticleDetailRightSideBarViewModel 

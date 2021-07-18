@@ -96,8 +96,15 @@ using System.Text.RegularExpressions;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 14 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\_ViewImports.cshtml"
+using MyBlog.Mvc.Utilities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a82b8043c241f9432a2262d90e25f64945f52c58", @"/Views/Article/Search.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2e3cd265a9f92f23d958551ca814fce4c738b549", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"22703fa9a3179bbd28bc177470a4e58e6e596d51", @"/Views/_ViewImports.cshtml")]
     public class Views_Article_Search : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ArticleSearchViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("value", "5", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -153,7 +160,7 @@ using System.Text.RegularExpressions;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<div class=\"col-md-8\">\r\n\r\n    <h1 class=\"my-4\">\r\n        Arama Sonuçları\r\n    </h1>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c589697", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c589890", async() => {
                 WriteLiteral("\r\n        <div class=\"form-row\">\r\n            <input type=\"hidden\" id=\"keyword\"");
                 BeginWriteAttribute("value", " value=\"", 449, "\"", 473, 1);
 #nullable restore
@@ -175,7 +182,7 @@ WriteAttributeValue("", 537, Model.ArticleListDto.CurrentPage, 537, 35, false);
 #nullable disable
                 EndWriteAttribute();
                 WriteLiteral(" />\r\n            <div class=\"form-group col-md-6\">\r\n                <select class=\"form-control\" id=\"select-page-size\">\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5811033", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5811226", async() => {
                     WriteLiteral("5");
                 }
                 );
@@ -200,7 +207,7 @@ AddHtmlAttributeValue("", 732, Model.ArticleListDto.PageSize==5?"selected":null,
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5812784", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5812977", async() => {
                     WriteLiteral("10");
                 }
                 );
@@ -225,7 +232,7 @@ AddHtmlAttributeValue("", 845, Model.ArticleListDto.PageSize==10?"selected":null
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5814537", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5814730", async() => {
                     WriteLiteral("20");
                 }
                 );
@@ -250,7 +257,7 @@ AddHtmlAttributeValue("", 961, Model.ArticleListDto.PageSize==20?"selected":null
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                </select>\r\n            </div>\r\n            <div class=\"form-group col-md-6\">\r\n                <select class=\"form-control\" id=\"select-is-ascending\">\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5816470", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5816663", async() => {
                     WriteLiteral("En Yeni");
                 }
                 );
@@ -275,7 +282,7 @@ AddHtmlAttributeValue("", 1243, Model.ArticleListDto.IsAscending==false?"selecte
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5818236", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5818429", async() => {
                     WriteLiteral("En Eski");
                 }
                 );
@@ -323,7 +330,7 @@ AddHtmlAttributeValue("", 1373, Model.ArticleListDto.IsAscending==true?"selected
 #line hidden
 #nullable disable
             WriteLiteral("        <!-- Blog Post -->\r\n        <div class=\"card mb-4\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a82b8043c241f9432a2262d90e25f64945f52c5821375", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a82b8043c241f9432a2262d90e25f64945f52c5821568", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -382,7 +389,7 @@ AddHtmlAttributeValue("", 1744, article.Title, 1744, 14, false);
 #line hidden
 #nullable disable
             WriteLiteral("\r\n                </p>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5824488", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5824681", async() => {
                 WriteLiteral("Daha fazla Oku &rarr;");
             }
             );
@@ -461,7 +468,7 @@ AddHtmlAttributeValue("", 1744, article.Title, 1744, 14, false);
 #line hidden
 #nullable disable
             WriteLiteral("                <li class=\"page-item\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5828765", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5828958", async() => {
                 WriteLiteral("Önceki");
             }
             );
@@ -554,7 +561,7 @@ WriteAttributeValue(" ", 3190, i==Model.ArticleListDto.CurrentPage ? "active":""
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5834437", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5834630", async() => {
 #nullable restore
 #line 74 "C:\Users\Blackerback\OneDrive\Masaüstü\MyBlog\MyBlog.Mvc\Views\Article\Search.cshtml"
                                                                                                                                                                                                                  Write(i);
@@ -643,7 +650,7 @@ WriteAttributeValue(" ", 3190, i==Model.ArticleListDto.CurrentPage ? "active":""
 #line hidden
 #nullable disable
             WriteLiteral("                <li class=\"page-item\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5839981", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a82b8043c241f9432a2262d90e25f64945f52c5840174", async() => {
                 WriteLiteral("Sonraki");
             }
             );

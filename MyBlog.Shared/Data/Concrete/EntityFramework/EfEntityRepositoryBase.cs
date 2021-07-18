@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyBlog.Shared.Data.Concrete.EntityFramework
@@ -62,8 +61,44 @@ namespace MyBlog.Shared.Data.Concrete.EntityFramework
                 }
             }
 
-            return await query.ToListAsync();
+            //AsNoTracking(). ile sadece include ettiğimiz yapılar gelecek o yapıların içerisindekileri de include etmeyecek
+            return await query.AsNoTracking().ToListAsync();
 
+        }
+
+        //Daha Geniş Bir Filtre Kontrolü yapıtğımız override metot oluşturmuş olduk
+        public async Task<IList<TEntity>> GetAllAsyncV2(IList<Expression<Func<TEntity, bool>>> predicates, IList<Expression<Func<TEntity, object>>> includeProperties)
+        {
+            //İstek Database e gitmeden sorguları biriktirmek için bir yapı kurduk
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            //Herhangi bir filtre verilmiş mi?
+            if (predicates != null && predicates.Any())
+            {
+                foreach (var predicate in predicates)
+                {
+                    query = query.Where(predicate);
+                }
+            }
+
+
+            //Include edilmesi istenen bir yapı var ise include işlemleri sağlanacaktır
+            if (includeProperties != null && includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            // AsNoTracking().ile sadece include ettiğimiz yapılar gelecek o yapıların içerisindekileri de include etmeyecek
+            return await query.AsNoTracking().ToListAsync();
+        }
+
+        //Uzun ve karışık sorgular için oluşturduk
+        public IQueryable<TEntity> GetAsQueryable()
+        {
+            return _context.Set<TEntity>().AsQueryable();
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
@@ -81,7 +116,37 @@ namespace MyBlog.Shared.Data.Concrete.EntityFramework
                 }
             }
 
-            return await query.SingleOrDefaultAsync();
+            //AsNoTracking(). ile sadece include ettiğimiz yapılar gelecek o yapıların içerisindekileri de include etmeyecek
+            return await query.AsNoTracking().SingleOrDefaultAsync();
+        }
+
+        //Daha Geniş Bir Filtre Kontrolü yapıtğımız override metot oluşturmuş olduk
+        public async Task<TEntity> GetAsyncV2(IList<Expression<Func<TEntity, bool>>> predicates, IList<Expression<Func<TEntity, object>>> includeProperties)
+        {
+            //İstek Database e gitmeden sorguları biriktirmek için bir yapı kurduk
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            //Herhangi bir filtre verilmiş mi?
+            if (predicates!=null && predicates.Any())
+            {
+                foreach (var predicate in predicates)
+                {
+                    query = query.Where(predicate);
+                }
+            }
+          
+
+            //Include edilmesi istenen bir yapı var ise include işlemleri sağlanacaktır
+            if (includeProperties!=null && includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            //AsNoTracking(). ile sadece include ettiğimiz yapılar gelecek o yapıların içerisindekileri de include etmeyecek
+            return await query.AsNoTracking().SingleOrDefaultAsync();
         }
 
         public async Task<IList<TEntity>> SearchAsync(IList<Expression<Func<TEntity, bool>>> predicates, params Expression<Func<TEntity, object>>[] includeProperties)
@@ -110,7 +175,8 @@ namespace MyBlog.Shared.Data.Concrete.EntityFramework
                 }
             }
 
-            return await query.ToListAsync();
+            //AsNoTracking() ile sadece include ettiğimiz yapılar gelecek o yapıların içerisindekileri de include etmeyecek
+            return await query.AsNoTracking().ToListAsync();
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)

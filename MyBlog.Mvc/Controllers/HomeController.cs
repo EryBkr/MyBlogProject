@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyBlog.Mvc.Controllers
 {
+    [Route("/")] //Domain.com/ --> slash ı tanımlar
     public class HomeController : Controller
     {
         private readonly IArticleService _articleService;
@@ -33,6 +34,9 @@ namespace MyBlog.Mvc.Controllers
         }
 
         [HttpGet]
+        [Route("index")] //SEO için gözükecek URL
+        [Route("anasayfa")]
+        [Route("")]
         public async Task<IActionResult> Index(int? categoryId, int currentPage = 1, int pageSize = 5,bool isAscending=false)
         {
             //Eğer kategori bilgisi bize verilirse ona uygun olan makaleleri sayfada göstereceğiz.Diğer türlü bütün makaleleri göstereceğiz sayfalamaya uygun olarak getireceğiz
@@ -50,6 +54,8 @@ namespace MyBlog.Mvc.Controllers
         }
 
         [HttpGet]
+        [Route("hakkimizda")]
+        [Route("hakkkinda")]
         public IActionResult About()
         {
             return View(_aboutUsPageInfo);
@@ -57,6 +63,7 @@ namespace MyBlog.Mvc.Controllers
 
 
         [HttpGet]
+        [Route("iletisim")]
         public IActionResult Contact()
         {
             return View();

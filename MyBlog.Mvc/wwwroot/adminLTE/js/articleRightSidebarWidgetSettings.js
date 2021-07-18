@@ -55,7 +55,10 @@ $(document).ready(function () {
             //Şuan ki tarihten kaç gün öncesi seçilebilsin
             minDate: -3,
             //Şuan ki tarihten kaç gün sonrası seçilebilsin
-            maxDate: 0
+            maxDate: +3,
+            onSelect: function (selectedDate) { //endDate başlangıç zamanının startDate göre ayarlanabilmesi için böyle bir kullanım gerçekleştirdik
+                $("#endDatePicker").datepicker("options", "minDate", selectedDate || getTodaysDate());
+            }
         });
 
         $("#endDatePicker").datepicker({
@@ -73,7 +76,7 @@ $(document).ready(function () {
             //Şuan ki tarihten kaç gün öncesi seçilebilsin
             minDate: 0,
             //Şuan ki tarihten kaç gün sonrası seçilebilsin
-            maxDate: +6
+            maxDate: +3
         });
     });
     //JQuery UI Datepicker

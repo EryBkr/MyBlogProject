@@ -55,3 +55,9 @@ function getJsonNetObjectById(parentObj, id) {
     }
     return null;
 }
+
+//C# taki DateTime.Now a karşılık gelecektir
+function getTodaysDate() {
+    let today = new Date();
+    return `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+}

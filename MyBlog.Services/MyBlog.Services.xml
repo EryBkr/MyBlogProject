@@ -63,6 +63,33 @@
             <param name="maxCommentsCount"></param>
             <returns></returns>
         </member>
+        <member name="M:MyBlog.Services.Concrete.ArticleManager.GetByIdAsync(System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Include işlemleri için daha merkezi bir kontrol oluşturmaya çalıştık.
+            </summary>
+            <param name="articleId"></param>
+            <param name="includeCategory"></param>
+            <param name="includeComments"></param>
+            <param name="includeUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.ArticleManager.GetAllAsyncV2(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Int32,System.Int32,MyBlog.Entities.ComplexTypes.OrderByGeneral,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Daha genel bir getAll metodudur.Bir çok filtremizi tek bir metot üzerinde uygulamamızı sağlar
+            </summary>
+            <param name="categoryId"></param>
+            <param name="userId"></param>
+            <param name="isActive"></param>
+            <param name="isDeleted"></param>
+            <param name="currentPage"></param>
+            <param name="pageSize"></param>
+            <param name="orderBy"></param>
+            <param name="isAscending"></param>
+            <param name="includeCategory"></param>
+            <param name="includeComments"></param>
+            <param name="includeUser"></param>
+            <returns></returns>
+        </member>
         <member name="M:MyBlog.Services.Concrete.CategoryManager.AddAsync(MyBlog.Entities.Dtos.CategoryDtos.CategoryAddDto,System.String)">
             <summary>
             Verilen CategoryAddDto yu veritabanına Category tipinde kaydeder
@@ -70,6 +97,13 @@
             <param name="categoryAddDto">Category tipini elde edeceğimiz parametredir</param>
             <param name="createdByName">Category i kimin eklediğini belirten parametredir</param>
             <returns>Asenkron bir operasyon ile Task olarak ekleme işleminin sonucunu DataResult tipinde geri döner</returns>
+        </member>
+        <member name="M:MyBlog.Services.Concrete.CategoryManager.GetAsync(System.Int32)">
+            <summary>
+            AsQueryable Kullanımına örnek olarak ekledim
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
         </member>
         <member name="M:MyBlog.Services.Concrete.CategoryManager.GetUpdateDtoAsync(System.Int32)">
             <summary>
@@ -92,11 +126,25 @@
             <param name="emailSendDto"></param>
             <returns></returns>
         </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Users.NotFoundById(System.Int32)">
+            <summary>
+            Verilen Id e ait kullanıcı var mı
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Category.NotFound(System.Boolean)">
             <summary>
             Kategorinin çoğul mu tekil mi olduğuna göre dönen mesaj değişecektir
             </summary>
             <param name="isPlural"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Category.NotFoundById(System.Int32)">
+            <summary>
+            Verilen Id e ait kategori var mı
+            </summary>
+            <param name="categoryId"></param>
             <returns></returns>
         </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Category.Add(System.String)">
@@ -144,6 +192,13 @@
             Makalenin çoğul mu tekil mi olduğuna göre dönen mesaj değişecektir
             </summary>
             <param name="isPlural"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyBlog.Services.Utilities.Messages.Article.NotFoundById(System.Int32)">
+            <summary>
+             Verilen Id e ait makale var mı
+            </summary>
+            <param name="articleId"></param>
             <returns></returns>
         </member>
         <member name="M:MyBlog.Services.Utilities.Messages.Article.NotFoundByCategory">

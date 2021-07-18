@@ -24,11 +24,12 @@ namespace MyBlog.Data.Concrete
         }
 
         //?? operatörü ile repository Null ise new leme işlemi yapıyoruz
-        public IArticleRepository Articles => _articleRepository ?? new EfArticleRepository(_context);
+        //null ise ??= operatorü ile _entityRepository e (örneğin _articleRepository) atama işlemi yapıyoruz diğer türlü o repo hep boş kalacaktır
+        public IArticleRepository Articles => _articleRepository ??=  new EfArticleRepository(_context);
 
-        public ICategoryRepository Categories => _categoryRepository ?? new EfCategoryRepository(_context);
+        public ICategoryRepository Categories => _categoryRepository ??= new EfCategoryRepository(_context);
 
-        public ICommentRepository Comments => _commentRepository ?? new EfCommentRepository(_context);
+        public ICommentRepository Comments => _commentRepository ??= new EfCommentRepository(_context);
 
         //GarbageCollector ı tetiklemek için oluşturduğumuz bir yapı
         public async ValueTask DisposeAsync()

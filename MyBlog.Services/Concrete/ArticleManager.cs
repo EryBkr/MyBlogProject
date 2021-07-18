@@ -7,6 +7,7 @@ using MyBlog.Entities.Concrete;
 using MyBlog.Entities.Dtos.ArticleDtos;
 using MyBlog.Services.Abstract;
 using MyBlog.Services.Utilities;
+using MyBlog.Shared.Entities.Concrete;
 using MyBlog.Shared.Utilities.Results.Abtracts;
 using MyBlog.Shared.Utilities.Results.ComplexTypes;
 using MyBlog.Shared.Utilities.Results.Concrete;
@@ -484,9 +485,141 @@ namespace MyBlog.Services.Concrete
             }
             else
             {
-                return new DataResult<ArticleListDto>(ResultStatus.Error, null,Messages.Article.NotFound(true));
+                return new DataResult<ArticleListDto>(ResultStatus.Error, null, Messages.Article.NotFound(true));
             }
 
+        }
+
+
+        /// <summary>
+        /// Include işlemleri için daha merkezi bir kontrol oluşturmaya çalıştık.
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <param name="includeCategory"></param>
+        /// <param name="includeComments"></param>
+        /// <param name="includeUser"></param>
+        /// <returns></returns>
+        public async Task<IDataResult<ArticleDto>> GetByIdAsync(int articleId, bool includeCategory, bool includeComments, bool includeUser)
+        {
+            //Filtreler
+            List<Expression<Func<Article, bool>>> predicates = new List<Expression<Func<Article, bool>>>();
+
+            //Joinler
+            List<Expression<Func<Article, object>>> includes = new List<Expression<Func<Article, object>>>();
+
+            //Join İşlemleri
+            if (includeCategory) includes.Add(i => i.Category);
+            if (includeComments) includes.Add(i => i.Comments);
+            if (includeUser) includes.Add(i => i.User);
+
+            //Filtre Uygulandı
+            predicates.Add(i => i.Id == articleId);
+
+            //Database'e gitti
+            var article = await UnitOfWork.Articles.GetAsyncV2(predicates, includes);
+
+            if (article == null)
+            {
+                return new DataResult<ArticleDto>(ResultStatus.Warning, null, new List<ValidationError>
+                {
+                    new ValidationError{PropertyName="articleId",Message=Messages.Article.NotFoundById(articleId)}
+                });
+            }
+
+            return new DataResult<ArticleDto>(ResultStatus.Success, new ArticleDto { Article = article });
+
+        }
+
+
+        /// <summary>
+        /// Daha genel bir getAll metodudur.Bir çok filtremizi tek bir metot üzerinde uygulamamızı sağlar
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="userId"></param>
+        /// <param name="isActive"></param>
+        /// <param name="isDeleted"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="orderBy"></param>
+        /// <param name="isAscending"></param>
+        /// <param name="includeCategory"></param>
+        /// <param name="includeComments"></param>
+        /// <param name="includeUser"></param>
+        /// <returns></returns>
+        public async Task<IDataResult<ArticleListDto>> GetAllAsyncV2(int? categoryId, int? userId, bool? isActive, bool? isDeleted, int currentPage, int pageSize, OrderByGeneral orderBy, bool isAscending, bool includeCategory, bool includeComments, bool includeUser)
+        {
+            //Filtreler
+            List<Expression<Func<Article, bool>>> predicates = new List<Expression<Func<Article, bool>>>();
+
+            //Joinler
+            List<Expression<Func<Article, object>>> includes = new List<Expression<Func<Article, object>>>();
+
+            //Join İşlemleri
+            if (includeCategory) includes.Add(i => i.Category);
+            if (includeComments) includes.Add(i => i.Comments);
+            if (includeUser) includes.Add(i => i.User);
+
+            //Filtre İşlemleri
+            if (categoryId.HasValue)
+            {
+                //Verilen CategoryId e ait bir kayıt var mı
+                if (!await UnitOfWork.Categories.AnyAsync(i => i.Id == categoryId))
+                {
+                    return new DataResult<ArticleListDto>(ResultStatus.Warning, null, new List<ValidationError>
+                {
+                    new ValidationError{PropertyName="categoryId",Message=Messages.Category.NotFoundById(categoryId.Value)}
+                });
+                }
+                predicates.Add(a => a.CategoryId == categoryId.Value);
+            }
+            if (userId.HasValue)
+            {
+                //Verilen userId e ait bir kayıt var mı
+                if (!await _userManager.Users.AnyAsync(u => u.Id == userId.Value))
+                {
+                    return new DataResult<ArticleListDto>(ResultStatus.Warning, null, new List<ValidationError>
+                {
+                    new ValidationError{PropertyName="categoryId",Message=Messages.Users.NotFoundById(userId.Value)}
+                });
+                }
+                predicates.Add(a => a.UserId == userId.Value);
+            }
+            if (isActive.HasValue) predicates.Add(a => a.IsActive == isActive.Value);
+            if (isDeleted.HasValue) predicates.Add(a => a.IsDeleted == isDeleted.Value);
+
+            //Joinlerin ve Filtrelerin sonucuna uygun makaleleri alıyoruz
+            var articles = await UnitOfWork.Articles.GetAllAsyncV2(predicates, includes);
+
+            //Sıralanmış Tanım
+            IOrderedEnumerable<Article> sortedArticles;
+
+            //verilen orderBy parametresine uygun olarak bir sıralama yapılacaktır
+            switch (orderBy)
+            {
+                case OrderByGeneral.Id:
+                    sortedArticles = isAscending ? articles.OrderBy(a => a.Id) : articles.OrderByDescending(i => i.Id);
+                    break;
+                case OrderByGeneral.AZ:
+                    sortedArticles = isAscending ? articles.OrderBy(a => a.Title) : articles.OrderByDescending(i => i.Title);
+                    break;
+                case OrderByGeneral.CreatedDate:
+                    sortedArticles = isAscending ? articles.OrderBy(a => a.CreatedDate) : articles.OrderByDescending(i => i.CreatedDate);
+                    break;
+                default:
+                    sortedArticles = isAscending ? articles.OrderBy(a => a.CreatedDate) : articles.OrderByDescending(i => i.CreatedDate);
+                    break;
+            }
+
+            return new DataResult<ArticleListDto>(ResultStatus.Success, new ArticleListDto
+            {
+                Articles = sortedArticles.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList(),
+                CategoryId = categoryId.HasValue ? categoryId.Value : null,
+                CurrentPage = currentPage,
+                PageSize = pageSize,
+                IsAscending = isAscending,
+                TotalCount = articles.Count,
+                ResultStatus = ResultStatus.Success
+            });
         }
     }
 }
